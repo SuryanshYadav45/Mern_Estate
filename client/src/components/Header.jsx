@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import { FaSearch, FaBars, FaCross } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { IoMdClose } from 'react-icons/io';
+
+const Header = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
+  return (
+    <header className='py-4 px-5 bg-[#6eb5aa]'>
+      <div className='flex justify-between items-center max-w-6xl mx-auto h-10'>
+        <Link to="/">
+          <h1 className='text-[35px] font-bold text-white'>
+            Real<span className='text-[#1b5051]'>Tor</span>
+          </h1>
+        </Link>
+
+        {/* Menu Icon for Small Screens */}
+        <div className='smlg:hidden cursor-pointer' onClick={toggleMenu}>
+          {menuVisible? <IoMdClose size={25} className='text-white' onClick={()=>setMenuVisible(!menuVisible)}/>:<FaBars size={25} className='text-white' />}
+        </div>
+
+        {/* Navigation for Large Screens */}
+        <div className={` hidden smlg:flex items-center space-x-4 ${menuVisible ? 'flex' : 'hidden'}`}>
+          <form className='flex items-center rounded-xl p-1 bg-white'>
+            <input type="text" placeholder='Search.....' className='rounded-xl w-[250px] px-[10px] py-[5px] outline-none' />
+            <FaSearch size={25} className='text-[#1b5051]' />
+          </form>
+          </div>
+          <div className={`hidden smlg:flex items-center space-x-4 ${menuVisible ? 'flex' : 'hidden'}`}>
+          <ul className='flex gap-4'>
+            <Link to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
+            <Link to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
+            <Link to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link>
+          </ul>
+        </div>
+
+        {/* Mobile Navigation for Small Screens */}
+        {menuVisible && (
+            <>
+
+            
+          <div className='smlg:hidden fixed top-[72px] bg-[#a9c2be] left-0 w-full h-full  flex  justify-center transition-all duration-300 ease-in-out'>
+            <div className=' w-full p-4 rounded-md'>
+              <form className='flex items-center mb-4 bg-white rounded'>
+                <input type="text" placeholder='Search.....' className='rounded-xl w-[90%] px-[10px] py-[5px] outline-none' />
+                <FaSearch size={25} className='text-[#1b5051]' />
+              </form>
+
+              <ul className='flex flex-col gap-2'>
+                <Link to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
+                <Link to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
+                <Link to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link>
+              </ul>
+            </div>
+          </div>
+          </>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
