@@ -1,16 +1,20 @@
-const express= require('express')
-const app=express();
+const express = require('express')
+const mongoose = require("mongoose");
+require("dotenv").config({path:"../.env"})
+const userRouter=require("./router/userRouter.js");
 
-app.get("/",(req,res)=>
-{
-res.send("this is from the server")
-})
-app.post("/signin",async(req,res)=>
-{
-    res.status(200).json("this is signin api")
+
+
+const app = express();
+
+mongoose.connect(process.env.DATABASE_STRING).then(() => {
+    console.log("database connected successfully")
+}).catch((error) => {
+    console.log(error)
 })
 
-app.listen(4000,()=>
-{
+app.listen(4000, () => {
     console.log("server started at the specified port")
 })
+
+app.use('/user',userRouter);
