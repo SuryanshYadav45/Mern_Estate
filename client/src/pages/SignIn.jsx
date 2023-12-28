@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { PulseLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import {signinEnd,signinStart} from ".././redux/slice/userSlice.js"
+import GoogleAuth from '../components/GoogleAuth.jsx';
 
 const SignIn = () => {
   const dispatch=useDispatch();
@@ -74,6 +75,8 @@ const SignIn = () => {
             placeholder='Enter Your Password'
             required />
           <button  disabled={loading} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? <PulseLoader color={'#F3F8FF'}  css={override} size={12} />:"Sign In"}</button>
+          <p className='text-center m-[-20px]'>OR</p>
+          <GoogleAuth/>
         </form>
       </div>
       <p>
