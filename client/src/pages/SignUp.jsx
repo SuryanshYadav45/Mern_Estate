@@ -1,80 +1,70 @@
-import React,{useState} from 'react'
-import {Link} from "react-router-dom";
+import React, { useState } from 'react'
+import { Link,useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
-      });
-    
-      const { username, email, password } = formData;
-    
-      const handleChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-        });
-      };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        // Add your logic to handle the signup, e.g., make an API request
-    
-        console.log('Form data submitted:', formData);
-      };
+  const [loading, setloading] = useState(false)
+  const navigate=useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const { username, email, password } = formData;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    setloading(true)
+    const res= await fetch("http://localhost:4000/signup",{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify(formData),
+    })
+    setloading(false)
+    if(res.status===201){
+      navigate('/signin')
+    }
+    console.log(res);
+
+  };
+
   return (
     <div className='w-full h-[calc(100vh-72px)] flex justify-center items-center flex-col bg-gray-300 '>
-      <div className='max-w-[600px] m-4 bg-white rounded-2xl shadow-xl overflow-hidden  hover:shadow-xl items-center'>
-      <h2 className='font-bold text-4xl text-center my-4'>Sign Up</h2>
-      <form onSubmit={handleSubmit} className='p-10 mt-8'>
-        <div className='py-2'>
-          {/* <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
+      <div className='m-4 bg-white rounded-2xl shadow-xl overflow-hidden  hover:shadow-xl items-center'>
+        <h2 className='font-bold text-4xl text-center mt-4 text-[#1b5051] uppercase'>Sign Up</h2>
+        <form onSubmit={handleSubmit} className='p-5 w-full gap-7 flex flex-col'>
+          <input type="text"
+            name='username'
+            autoComplete='off'
             onChange={handleChange}
-            required
-          /> */}
-          <label for="input1">
-            <span class="ml-2 text-[30px] text-black sm:text-base ">Enter Your Username:</span>
-            <input id="input1" minlength="5"
-              class="mt-1 py-3 px-5 w-full border-2 border-[#1b5051]-300 rounded-2xl outline-none placeholder:text-gray-400 invalid:text-pink-700 invalid:focus:ring-pink-700 invalid:focus:border-pink-700 peer "
-              type="text" placeholder="Type something" />
-            <p class="ml-2 text-xs text-pink-700 invisible peer-invalid:visible dark:text-gray-200">less than 5
-              characters</p>
-          </label>
-        </div>
-        <div className='py-2'>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
+            className='w-[250px] text-[14px] mt-3 h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
+            placeholder='Enter Your Name' />
+          <input type="email"
+            name='email'
+            autoComplete='off'
             onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='py-2'>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
+            className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
+            placeholder='Enter Your Email' />
+          <input type="password"
             name="password"
-            value={password}
             onChange={handleChange}
-            required
-          />
-        </div>
-        <button  type="submit">Sign Up</button>
-      </form>
+            className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
+            placeholder='Enter Your Password' />
+          <button disabled={loading==true} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? "Loading...":"Sign Up"}</button>
+        </form>
       </div>
       <p>
-        Already have an account? <Link to="/signin">Login here</Link>
+        Already have an account? <Link to="/signin" className='cursor-pointer text-[#1b5051]'>Login here</Link>
       </p>
     </div>
   )
