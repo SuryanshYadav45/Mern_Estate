@@ -10,7 +10,6 @@ const SignUp = () => {
     password: '',
   });
 
-  const { username, email, password } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +22,7 @@ const SignUp = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     setloading(true)
-    const res= await fetch("http://localhost:4000/signup",{
+    const res= await fetch("http://localhost:4000/auth/signup",{
       method:'POST',
       headers:{
         'Content-Type':'application/json',

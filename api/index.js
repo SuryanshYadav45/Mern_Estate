@@ -23,4 +23,4 @@ app.listen(4000, () => {
 })
 
 app.use('/user',userRouter);
-app.use('/signup',authRouter);
+app.use('/auth',authRouter);
