@@ -18,11 +18,11 @@ const GoogleAuth = () => {
         }
     }
   return (
-    <div onClick={handleauth} class="w-full bg-[#4285f4] text-white flex items-center justify-center  p-2 rounded-lg hover:cursor-pointer hover:opacity-80">
-  <div class=" bg-white p-1 w-[40px] h-[30px] mx-1 flex justify-center items-center">
-    <img class="size-5" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
+    <div onClick={handleauth} className="w-full bg-[#4285f4] text-white flex items-center justify-center  p-2 rounded-lg hover:cursor-pointer hover:opacity-80">
+  <div className=" bg-white p-1 w-[40px] h-[30px] mx-1 flex justify-center items-center">
+    <img className="size-5" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
   </div>
-  <p class="text-white-400 font-400  capitalize"><b>Sign in with google</b></p>
+  <p className="text-white-400 font-400  capitalize"><b>Sign in with google</b></p>
 </div>
   )
 }
