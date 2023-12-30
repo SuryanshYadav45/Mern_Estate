@@ -21,8 +21,6 @@ const GoogleAuth = () => {
               body:JSON.stringify({idToken})
             })
 
-            console.log(response);
-
         } catch (error) {
             console.log(error)
         }
