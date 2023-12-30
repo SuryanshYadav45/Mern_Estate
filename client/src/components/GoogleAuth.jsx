@@ -1,5 +1,5 @@
 import React from 'react'
-import {GoogleAuthProvider, getAuth, signInWithPopup} from "firebase/auth"
+import {GoogleAuthProvider, getAuth,getIdToken, signInWithPopup} from "firebase/auth"
 import { app } from '../firebase';
 
 const GoogleAuth = () => {
@@ -11,14 +11,24 @@ const GoogleAuth = () => {
             const auth=getAuth(app)
             
             const result=await signInWithPopup(auth,provider)
-            console.log(result)
+            const idToken=await result.user.getIdToken();
+            
+            const response= await fetch('http://localhost:4000/auth/signin/google',{
+              method:"POST",
+              headers:{
+                'Content-Type':'application/json',
+              },
+              body:JSON.stringify({idToken})
+            })
+
+            console.log(response);
 
         } catch (error) {
             console.log(error)
         }
     }
   return (
-    <div onClick={handleauth} className="w-full bg-[#4285f4] text-white flex items-center justify-center  p-2 rounded-lg hover:cursor-pointer hover:opacity-80">
+    <div onClick={handleauth} className="w-full bg-white text-black border border-black  flex items-center justify-center  p-2 rounded-lg hover:cursor-pointer hover:opacity-80">
   <div className=" bg-white p-1 w-[40px] h-[30px] mx-1 flex justify-center items-center">
     <img className="size-5" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
   </div>

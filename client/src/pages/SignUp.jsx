@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link,useNavigate } from "react-router-dom";
+import GoogleAuth from '../components/GoogleAuth';
 
 const SignUp = () => {
   const [loading, setloading] = useState(false)
@@ -60,6 +61,8 @@ const SignUp = () => {
             className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
             placeholder='Enter Your Password' />
           <button disabled={loading==true} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? "Loading...":"Sign Up"}</button>
+          <p className='text-center m-[-20px]'>OR</p>
+          <GoogleAuth/>
         </form>
       </div>
       <p>
