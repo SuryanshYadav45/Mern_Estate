@@ -1,12 +1,29 @@
 import React from 'react'
 import {GoogleAuthProvider, getAuth,getIdToken, signInWithPopup} from "firebase/auth"
 import { app } from '../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { css } from '@emotion/react';
+import { PulseLoader } from 'react-spinners';
+import {signinStart,signinEnd} from "../redux/slice/userSlice.js"
+import { useNavigate } from 'react-router-dom';
 
 const GoogleAuth = () => {
+  const naviagte=useNavigate();
+  const dispatch=useDispatch();
+  const {loading} = useSelector((state) => state);
+    
+  const override =css `
+    display: "block",
+    margin: "0 auto",
+    borderColor: "white",
+  `;
+
+
 
     const handleauth=async()=>
     {
         try {
+            dispatch(signinStart());
             const provider= new GoogleAuthProvider();
             const auth=getAuth(app)
             
@@ -20,7 +37,12 @@ const GoogleAuth = () => {
               },
               body:JSON.stringify({idToken})
             })
-
+            const data=await response.json();
+            dispatch(signinEnd(data));
+            if(response.status===200)
+            {
+              naviagte('/')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -30,7 +52,7 @@ const GoogleAuth = () => {
   <div className=" bg-white p-1 w-[40px] h-[30px] mx-1 flex justify-center items-center">
     <img className="size-5" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
   </div>
-  <p className="text-white-400 font-400  capitalize"><b>Sign in with google</b></p>
+  <p className="text-black font-400  capitalize">{loading? <PulseLoader color={'#000000'}  css={override} size={11} />:"Sign In with google"}</p>
 </div>
   )
 }

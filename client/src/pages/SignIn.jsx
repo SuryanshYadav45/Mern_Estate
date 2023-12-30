@@ -8,7 +8,7 @@ import GoogleAuth from '../components/GoogleAuth.jsx';
 
 const SignIn = () => {
   const dispatch=useDispatch();
-  const {loading} = useSelector((state) => state.user)||{loading:false};
+  const {loading} = useSelector((state) => state);
 
 
   const navigate=useNavigate();

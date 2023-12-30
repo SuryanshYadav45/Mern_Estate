@@ -66,7 +66,7 @@ const SignUp = () => {
         </form>
       </div>
       <p>
-        Already have an account? <Link to="/signin" className='cursor-pointer text-[#1b5051]'>Login here</Link>
+        Already have an account? <Link to="/signin" className='cursor-pointer text-[#1b5051]'>SignIn</Link>
       </p>
     </div>
   )

@@ -12,12 +12,13 @@ const userSlice=createSlice({
         signinStart:(state,action)=>
         {
             state.loading=true;
+
             
         },
         signinEnd:(state,action)=>{
-            state.currentuser=action.payload,
-            state.loading=false
-            console.log(state.currentuser)
+            state.currentuser=action.payload;
+            state.loading=false;
+            
         }
     }
 
