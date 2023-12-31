@@ -34,7 +34,7 @@ const signin = async (req, res) => {
     !user ? res.status(404).send("User not found") : null;
     const ValidUser = await bcrypt.compare(password, user.password)
     if (ValidUser) {
-      const token = jwt.sign({ id: user._id, username: user.username }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user._id, username: user.username ,photoUrl:user.photoUrl }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
       res.status(200).json({ token });
     }
 

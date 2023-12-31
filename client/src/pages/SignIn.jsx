@@ -8,7 +8,7 @@ import GoogleAuth from '../components/GoogleAuth.jsx';
 
 const SignIn = () => {
   const dispatch=useDispatch();
-  const {loading} = useSelector((state) => state);
+  const {loading} = useSelector((state) => state.user);
 
 
   const navigate=useNavigate();
@@ -76,7 +76,7 @@ const SignIn = () => {
             required />
           <button  disabled={loading} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? <PulseLoader color={'#F3F8FF'}  css={override} size={12} />:"Sign In"}</button>
           <p className='text-center m-[-20px]'>OR</p>
-          <GoogleAuth/>
+          <GoogleAuth text="in" />
         </form>
       </div>
       <p>

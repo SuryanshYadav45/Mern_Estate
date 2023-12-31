@@ -7,10 +7,10 @@ import { PulseLoader } from 'react-spinners';
 import {signinStart,signinEnd} from "../redux/slice/userSlice.js"
 import { useNavigate } from 'react-router-dom';
 
-const GoogleAuth = () => {
+const GoogleAuth = (props) => {
   const naviagte=useNavigate();
   const dispatch=useDispatch();
-  const {loading} = useSelector((state) => state);
+  const {loading} = useSelector((state) => state.user);
     
   const override =css `
     display: "block",
@@ -52,7 +52,7 @@ const GoogleAuth = () => {
   <div className=" bg-white p-1 w-[40px] h-[30px] mx-1 flex justify-center items-center">
     <img className="size-5" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
   </div>
-  <p className="text-black font-400  capitalize">{loading? <PulseLoader color={'#000000'}  css={override} size={11} />:"Sign In with google"}</p>
+  <p className="text-black font-400  capitalize">{loading? <PulseLoader color={'#000000'}  css={override} size={11} />:`Sign ${props.text} with google`}</p>
 </div>
   )
 }

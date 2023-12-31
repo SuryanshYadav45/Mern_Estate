@@ -19,10 +19,13 @@ const userSlice=createSlice({
             state.currentuser=action.payload;
             state.loading=false;
             
+        },
+        logout:(state)=>{
+            state.currentuser=null
         }
     }
 
 })
 
-export const{signinStart,signinEnd}=userSlice.actions;
+export const{signinStart,signinEnd,logout}=userSlice.actions;
 export default userSlice.reducer;
