@@ -34,7 +34,7 @@ const signin = async (req, res) => {
     !user ? res.status(404).send("User not found") : null;
     const ValidUser = await bcrypt.compare(password, user.password)
     if (ValidUser) {
-      const token = jwt.sign({ id: user._id, username: user.username ,photoUrl:user.photoUrl }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user._id, username: user.username ,photoUrl:user.photoUrl,email:user.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
       res.status(200).json({ token });
     }
 
@@ -63,7 +63,7 @@ const googleSignin = async (req, res) => {
         photoUrl: decodedToken.picture
       });
     }
-    const token = jwt.sign({ id: user._id, username: user.username,photoUrl:user.photoUrl }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, username: user.username,photoUrl:user.photoUrl,email:user.email  }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
     res.status(200).json({ token });
   } catch (error) {
     console.error('Error:', error);

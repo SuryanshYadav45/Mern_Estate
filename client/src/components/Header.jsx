@@ -51,7 +51,7 @@ const Header = () => {
             <Link className="flex items-center justify-center" to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
             <Link className="flex items-center justify-center" to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
             {currentuser?
-            <Link to="/profile"><img className='rounded-full w-12 border-2 cursor-pointer ' src={photoUrl}/></Link>
+            <Link to="/profile"><img className='rounded-full w-12 h-12 border-2 cursor-pointer ' src={photoUrl}/></Link>
             
             
             :<Link className="flex items-center justify-center" to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link>}
