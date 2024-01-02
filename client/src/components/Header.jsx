@@ -14,7 +14,7 @@ const Header = () => {
   const dispatch=useDispatch();
   const {currentuser}=useSelector((state)=>state.user);
   
-  const decoded=currentuser? jwtDecode(currentuser.token):null
+  const decoded=currentuser && currentuser.token? jwtDecode(currentuser.token):null
   const{photoUrl}=decoded||{};
 
   const toggleMenu = () => {

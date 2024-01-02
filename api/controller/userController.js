@@ -17,7 +17,7 @@ const updateUser=async(req,res)=>{
         user.email=email?email:user.email;
 
         const updateduser= await user.save();
-        res.status(200).json(updateUser);
+        res.status(200).json(updateduser);
     }
 
 

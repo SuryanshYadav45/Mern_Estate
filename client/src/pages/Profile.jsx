@@ -41,7 +41,7 @@ const Profile = () => {
     }
   }, [file])
 
-  const handleImageUpload = async (file) => {
+  const handleImageUpload =  (file) => {
     try {
       const storage = getStorage(app);
       const filename = new Date().getTime() + file.name;
@@ -83,8 +83,22 @@ const Profile = () => {
           });
         }
       );
+   } catch (error) {
+      console.log(error)
+    }
+  }
+  const handlechange=(e)=>{
+    const{name,value}=e.target
+    setformdata((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
 
-     const response=await fetch(`http://localhost:4000/user/update/${id}`,
+  const handleUpdate=async(e)=>{
+    e.preventDefault();
+    try {
+      const response=await fetch(`http://localhost:4000/user/update/${id}`,
       {
         method:"POST",
         headers:{
@@ -94,12 +108,12 @@ const Profile = () => {
       })
       const data=await response.json();
       console.log(data);
-
-
     } catch (error) {
-      console.log(error)
+      
     }
   }
+
+
 
   console.log(upPer + "%");
   console.log(formdata)
@@ -109,10 +123,10 @@ const Profile = () => {
         <h1 className='capitalize text-center font-semibold text-[25px] tabl:text-[40px] my-4'>profile</h1>
         <input type="file" onChange={(e) => setfile(e.target.files[0])} hidden ref={fileref} accept='image/*' />
         <img src={formdata.photourl} onClick={() => fileref.current.click()} className='mx-auto my-3 rounded-full w-[80px] h-[80px] lg:w-[140px] lg:h-[140px] tabl:w-[120px] tabl:h-[120px] cursor-pointer' alt="" />
-        <form className='flex justify-center flex-col items-center'>
-          <input type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
+        <form onSubmit={handleUpdate} className='flex justify-center flex-col items-center'>
+          <input defaultValue={formdata.username} onChange={handlechange} name='username' type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
 
-          <input type="email" className='w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='email' />
+          <input defaultValue={formdata.email} onChange={handlechange} name='email' type="email" className='w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='email' />
           <button className='bg-[#2f5d56] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 rounded-md uppercase' >Update</button>
           <button className='bg-[#369434] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 my-4 rounded-md uppercase' >Create Property</button>
         </form>
