@@ -15,7 +15,7 @@ app.use(express.json());
 mongoose.connect(process.env.DATABASE_STRING).then(() => {
     console.log("database connected successfully")
 }).catch((error) => {
-    console.log("an error occured:".error)
+    console.log("an error occured:",error)
 })
 
 app.listen(4000, () => {
