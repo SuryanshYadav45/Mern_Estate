@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 const getUser=async(req,res)=>{
 res.status(200).send("getuser api is working")
 };
+
+
 const updateUser=async(req,res)=>{
 
     const{username,email,photoUrl}=req.body;
@@ -27,7 +29,18 @@ const updateUser=async(req,res)=>{
 
 };
 
+const deleteUser=async(req,res)=>{
+    try {
+       await UserModel.findByIdAndDelete(req.params.id) 
+       res.status(200).json({message:"user deleted successfully"})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({Error:"error occured"})
+    }
+}
+
 module.exports={
     getUser,
-    updateUser
+    updateUser,
+    deleteUser
 }

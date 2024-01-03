@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {signinStart,signinEnd} from"../redux/slice/userSlice.js"
+import { signinStart, signinEnd } from "../redux/slice/userSlice.js"
 import { jwtDecode } from "jwt-decode";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase.js";
 
 const Profile = () => {
-  const dispatch=useDispatch();
-  
+  const dispatch = useDispatch();
+
   const [file, setfile] = useState();
   const [upPer, setupPer] = useState(0)
   const [formdata, setformdata] = useState({
@@ -15,14 +15,14 @@ const Profile = () => {
     email: '',
     photourl: ''
   })
-  const { currentuser,loading } = useSelector((state) => state.user)
+  const { currentuser, loading } = useSelector((state) => state.user)
 
 
 
 
 
   const decoded = currentuser ? jwtDecode(currentuser.token) : null
-  const { photoUrl, username, email,id } = decoded || {};
+  const { photoUrl, username, email, id } = decoded || {};
   const fileref = useRef(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Profile = () => {
     }
   }, [file])
 
-  const handleImageUpload =  (file) => {
+  const handleImageUpload = (file) => {
     try {
       const storage = getStorage(app);
       const filename = new Date().getTime() + file.name;
@@ -86,36 +86,39 @@ const Profile = () => {
           });
         }
       );
-   } catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }
-  
-  const handlechange=(e)=>{
-    dispatch(signinStart());
-    const{name,value}=e.target
+
+  const handlechange = (e) => {
+    
+    const { name, value } = e.target
     setformdata((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   }
 
-  const handleUpdate=async(e)=>{
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    dispatch(signinStart());
     try {
-      const response=await fetch(`http://localhost:4000/user/update/${id}`,
-      {
-        method:"POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify(formdata)
-      })
-      const data=await response.json();
-      dispatch(signinEnd(data));
+      const response = await fetch(`http://localhost:4000/user/update/${id}`,
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formdata)
+        })
+      setTimeout(async ()=>{
+        const data = await response.json();
+        dispatch(signinEnd(data));
+      },1000)
       console.log(data);
     } catch (error) {
-      
+
     }
   }
 
@@ -133,7 +136,11 @@ const Profile = () => {
           <input defaultValue={formdata.username} onChange={handlechange} name='username' type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
 
           <input defaultValue={formdata.email} onChange={handlechange} name='email' type="email" className='w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='email' />
-          <button onClick={handleUpdate} className='bg-[#2f5d56] flex justify-center items-center w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 rounded-md uppercase'><svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>Update</button>
+          <button onClick={handleUpdate} className='bg-[#2f5d56] flex justify-center items-center w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 rounded-md uppercase'>
+            {loading? <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+              <circle className="opacity-[0]" cx="12" cy="12" r="10" stroke-width="4"></circle>
+            <path className="opacity-100" fill="currentColor"  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.416A7.96 7.96 0 014 12H0c0 6.627 5.373 12 12 12v-4c-3.313 0-6.055-2.09-7.097-5.002z"></path>
+            </svg>:null}Update</button>
           <button className='bg-[#369434] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 my-4 rounded-md uppercase' >Create Property</button>
         </form>
         <div className='flex justify-between items-center  moblg:w-[380px] tabl:w-[500px] lg:w-[500px] m-auto'>
