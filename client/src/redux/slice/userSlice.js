@@ -20,6 +20,9 @@ const userSlice=createSlice({
             state.loading=false;
             
         },
+        // updateToken:(state,action)=>{
+        //     state.currentuser=action.payload;
+        // },
         logout:(state)=>{
             state.currentuser=null
         }

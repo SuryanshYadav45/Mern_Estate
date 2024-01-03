@@ -1,4 +1,7 @@
 const UserModel = require("../models/UserModel");
+const jwt = require('jsonwebtoken');
+
+
 
 const getUser=async(req,res)=>{
 res.status(200).send("getuser api is working")
@@ -17,7 +20,8 @@ const updateUser=async(req,res)=>{
         user.email=email?email:user.email;
 
         const updateduser= await user.save();
-        res.status(200).json(updateduser);
+        const token= jwt.sign({ id: user._id, username: user.username ,photoUrl:user.photoUrl,email:user.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+        res.status(200).json({token});
     }
 
 

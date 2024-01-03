@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {signinStart,signinEnd} from"../redux/slice/userSlice.js"
 import { jwtDecode } from "jwt-decode";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase.js";
 
 const Profile = () => {
+  const dispatch=useDispatch();
+  
   const [file, setfile] = useState();
   const [upPer, setupPer] = useState(0)
   const [formdata, setformdata] = useState({
@@ -12,7 +15,7 @@ const Profile = () => {
     email: '',
     photourl: ''
   })
-  const { currentuser } = useSelector((state) => state.user)
+  const { currentuser,loading } = useSelector((state) => state.user)
 
 
 
@@ -87,7 +90,9 @@ const Profile = () => {
       console.log(error)
     }
   }
+  
   const handlechange=(e)=>{
+    dispatch(signinStart());
     const{name,value}=e.target
     setformdata((prevData) => ({
       ...prevData,
@@ -107,6 +112,7 @@ const Profile = () => {
         body:JSON.stringify(formdata)
       })
       const data=await response.json();
+      dispatch(signinEnd(data));
       console.log(data);
     } catch (error) {
       
@@ -127,7 +133,7 @@ const Profile = () => {
           <input defaultValue={formdata.username} onChange={handlechange} name='username' type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
 
           <input defaultValue={formdata.email} onChange={handlechange} name='email' type="email" className='w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='email' />
-          <button className='bg-[#2f5d56] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 rounded-md uppercase' >Update</button>
+          <button onClick={handleUpdate} className='bg-[#2f5d56] flex justify-center items-center w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 rounded-md uppercase'><svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>Update</button>
           <button className='bg-[#369434] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 my-4 rounded-md uppercase' >Create Property</button>
         </form>
         <div className='flex justify-between items-center  moblg:w-[380px] tabl:w-[500px] lg:w-[500px] m-auto'>
