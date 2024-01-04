@@ -20,12 +20,15 @@ const App = () => {
         <Route  element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>}/>
           </Route>
+        <Route  element={<PrivateRoute/>}>
+        <Route path='/create-property' element={<CreateProperty/>} />
+          </Route>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/create-property' element={<CreateProperty/>} />
+       
       </Routes>
     </Router>
   </>
