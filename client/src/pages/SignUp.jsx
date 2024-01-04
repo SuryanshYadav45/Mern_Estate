@@ -41,7 +41,7 @@ const SignUp = () => {
       body:JSON.stringify(formData),
     })
     const data=await res.json();
-    dispatch(signinEnd(data));
+    dispatch(signinEnd(null));
     if(res.status===201){
       navigate('/signin')
     }
@@ -59,18 +59,21 @@ const SignUp = () => {
             autoComplete='off'
             onChange={handleChange}
             className='w-[250px] text-[14px] mt-3 h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
-            placeholder='Enter Your Name' />
+            placeholder='Enter Your Name'
+            required />
           <input type="email"
             name='email'
             autoComplete='off'
             onChange={handleChange}
             className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
-            placeholder='Enter Your Email' />
+            placeholder='Enter Your Email'
+            required />
           <input type="password"
             name="password"
             onChange={handleChange}
             className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
-            placeholder='Enter Your Password' />
+            placeholder='Enter Your Password'
+            required />
           <button disabled={loading==true} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? <PulseLoader color={'#F3F8FF'}  css={override} size={12} /> :"Sign Up"}</button>
           <p className='text-center m-[-20px]'>OR</p>
           <GoogleAuth text="up"/>

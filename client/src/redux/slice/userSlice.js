@@ -24,7 +24,8 @@ const userSlice=createSlice({
         //     state.currentuser=action.payload;
         // },
         logout:(state)=>{
-            state.currentuser=null
+            state.loading=false;
+            state.currentuser=null;
         }
     }
 

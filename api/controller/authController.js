@@ -19,7 +19,7 @@ const signup = async (req, res) => {
       email,
       password: hashpassword
     })
-    res.status(201).send("User created successfully ");
+    res.status(201).json({message:"User created successfully "});
 
 
   } catch (error) {
@@ -40,7 +40,7 @@ const signin = async (req, res) => {
 
   } catch (error) {
     console.log(error)
-    res.status(404).send("user not found")
+    res.status(404).json({message:"user not found"})
   }
 }
 

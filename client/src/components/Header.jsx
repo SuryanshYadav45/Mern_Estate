@@ -20,10 +20,6 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
-  const logoutuser=()=>
-  {
-    dispatch(logout());
-  }
 
   return (
     <header className='py-4 px-5 bg-[#6eb5aa]'>
@@ -33,7 +29,7 @@ const Header = () => {
             Real<span className='text-[#1b5051]'>Tor</span>
           </h1>
         </Link>
-        <button onClick={logoutuser}>logout</button>
+        
         {/* Menu Icon for Small Screens */}
         <div className='smlg:hidden cursor-pointer' onClick={toggleMenu}>
           {menuVisible? <IoMdClose size={25} className='text-white' onClick={()=>setMenuVisible(!menuVisible)}/>:<FaBars size={25} className='text-white' />}

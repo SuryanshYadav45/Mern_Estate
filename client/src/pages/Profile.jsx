@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signinStart, signinEnd } from "../redux/slice/userSlice.js"
+import { signinStart, signinEnd,logout } from "../redux/slice/userSlice.js"
 import { jwtDecode } from "jwt-decode";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase.js";
+import {  useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const dispatch = useDispatch();
-
+  const navigate=useNavigate();
   const [file, setfile] = useState();
   const [upPer, setupPer] = useState(0)
   const [formdata, setformdata] = useState({
@@ -122,6 +123,24 @@ const Profile = () => {
     }
   }
 
+  const handlelogout=()=>{
+    dispatch(logout());
+  }
+
+  const handledelete=async()=>{
+    dispatch(signinStart())
+    const response=await fetch(`http://localhost:4000/user/delete/${id}`,{
+      method:"POST",
+      
+    })
+    if(response.status==200){
+      setTimeout(()=>{
+        dispatch(logout());
+      navigate('/');
+      },1000)
+      
+    }
+  }
 
 
   console.log(upPer + "%");
@@ -144,8 +163,8 @@ const Profile = () => {
           <button className='bg-[#369434] w-full moblg:w-[380px] tabl:w-[500px] lg:w-[500px] text-white p-2 my-4 rounded-md uppercase' >Create Property</button>
         </form>
         <div className='flex justify-between items-center  moblg:w-[380px] tabl:w-[500px] lg:w-[500px] m-auto'>
-          <p className='text-red-700 capitalize'>delete account</p>
-          <p className='text-red-700 capitalize'>sign out</p>
+          <button onClick={handledelete} className='text-red-700 capitalize'>delete account</button>
+          <button onClick={handlelogout} className='text-red-700 capitalize'>sign out</button>
         </div>
         <p className='text-center my-6 capitalize text-[#369434]'>show property</p>
 
