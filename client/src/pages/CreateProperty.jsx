@@ -6,7 +6,7 @@ const CreateProperty = () => {
             <h1 className='text-center'>Create Your Property</h1>
             <div className='max-w-[1150px] m-auto flex flex-col tabl:flex-row'>
 
-                <div className='w-[100%] p-4'>
+                <div className='w-[100%] tabl:w-[50%] p-4 flex flex-col'>
                     <input type="text" placeholder='Name of the Porperty' />
                     <textarea name="description" id="desc" cols="30" rows="10" placeholder='Description'></textarea>
                     <input type="text" name="address" placeholder='Address' />
@@ -45,8 +45,9 @@ const CreateProperty = () => {
                     </div>
 
                 </div>
-                <div className='w-[100%] p-4'>
-                    <input type="file" />
+                <div className='w-[100%] tabl:w-[50%] p-4'>
+                    <p><b>Images:</b>The first image will be cover(max-6) </p>
+                    <input className='p-2 border border-gray-400' type="file" />
                 </div>
             </div>
         </div>
