@@ -6,13 +6,12 @@ import Profile from "./pages/Profile"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import Header from './components/Header'
-import { useSelector } from 'react-redux'
 import PrivateRoute from './components/PrivateRoute'
+import CreateProperty from './pages/CreateProperty'
 
 
 const App = () => {
 
-  const {currentuser}=useSelector((state)=>state.user)
 
   return (<>
     <Router>
@@ -26,6 +25,7 @@ const App = () => {
         
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/create-property' element={<CreateProperty/>} />
       </Routes>
     </Router>
   </>

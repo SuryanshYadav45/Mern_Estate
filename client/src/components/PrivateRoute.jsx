@@ -9,7 +9,7 @@ const PrivateRoute = ({ element, ...rest }) => {
     return currentuser !== null ? (
       <Outlet/>
     ) : (
-      <Navigate to="/signup" replace />
+      <Navigate to="/" replace />
     );
   };
 
