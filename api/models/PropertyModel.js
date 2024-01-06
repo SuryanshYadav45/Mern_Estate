@@ -1,10 +1,45 @@
 const mongoose = require("mongoose");
 
 const propertySchema= mongoose.Schema({
-    name:{
-        type:String
+    propname:{
+        type:String,
+        required:true,
     },
-})
+    desc:{
+        type:String,
+        required:true,
+
+    },
+    address:{
+        type:String,
+        required:true,
+    },
+    price:{
+        type:Number,
+        required:true,
+    },
+    beds:{
+        type:Number,
+        required:true,
+    },
+    parking:{
+        type:Boolean,
+        required:true
+    },
+    furnished:{
+        type:Boolean,
+        required:true
+    },
+    imageurl:{
+        type:Array,
+        required:true
+    },
+    userid:{
+        type:String,
+        required:true
+    }
+
+},{timestamps:true})
 
 const PropertyModel= mongoose.model('properties',propertySchema);
 

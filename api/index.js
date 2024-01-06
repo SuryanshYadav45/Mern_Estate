@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({path:"../.env"})
 const userRouter=require("./router/userRouter.js");
 const authRouter=require("./router/authRouter.js");
+const listingRouter=require("./router/listingRouter.js");
 const cors=require("cors")
 const app = express();
 
@@ -24,3 +25,4 @@ app.listen(4000, () => {
 
 app.use('/user',userRouter);
 app.use('/auth',authRouter);
+app.use('/listing',listingRouter);
