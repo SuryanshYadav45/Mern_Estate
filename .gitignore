@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
-./firebase_credentials.json
+/firebase_credentials.json
 firebase.js
 # Editor directories and files
 .vscode/*
