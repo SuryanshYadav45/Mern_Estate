@@ -17,14 +17,34 @@ const Profile = () => {
     photourl: ''
   })
   const { currentuser, loading } = useSelector((state) => state.user)
-
-
-
-
-
   const decoded = currentuser ? jwtDecode(currentuser.token) : null
+  console.log(decoded)
   const { photoUrl, username, email, id } = decoded || {};
   const fileref = useRef(null);
+  
+  const timestamp = 1704633953;
+const expirationDate = new Date(timestamp * 1000);
+
+console.log(expirationDate);
+
+
+  useEffect(()=>{
+    if (decoded && decoded.exp) {
+      // Get the current timestamp
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      if (decoded.exp < currentTimestamp) {
+        dispatch(logout());
+        navigate('/signin')
+      }
+    }
+  },[decoded])
+
+
+
+  
+  
+  
+  
 
   useEffect(() => {
 
@@ -36,10 +56,7 @@ const Profile = () => {
         photourl: photoUrl
       }))
     }
-
-
-
-
+  
     if (file) {
       handleImageUpload(file);
     }
