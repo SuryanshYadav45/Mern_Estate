@@ -5,10 +5,10 @@ import { BiSolidBath } from "react-icons/bi";
 
 const Cards = ({data}) => {
   return (
-    <div>
+    
         
 
-<div className="w-[330px] h-[470px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+<div className="w-[330px] m-2 h-[470px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
     
         <img className="rounded-t-lg h-[55%] bg-cover w-full hover:scale-[1.1] transition-all duration-500" src={data.imageurls[0]} alt="" />
     
@@ -24,7 +24,7 @@ const Cards = ({data}) => {
     </div>
 </div>
 
-    </div>
+    
   )
 }
 
