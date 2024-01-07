@@ -22,6 +22,10 @@ const propertySchema= mongoose.Schema({
         type:Number,
         required:true,
     },
+    bathrooms:{
+        type:Number,
+        required:true
+    },
     parking:{
         type:Boolean,
         required:true
@@ -30,11 +34,15 @@ const propertySchema= mongoose.Schema({
         type:Boolean,
         required:true
     },
-    imageurl:{
+    imageurls:{
         type:Array,
         required:true
     },
     userid:{
+        type:String,
+        required:true
+    },
+    type:{
         type:String,
         required:true
     }
