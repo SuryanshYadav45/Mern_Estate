@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Cards from '../components/Cards'
+import UserListing from '../components/UserListing'
 
 const Home = () => {
 
@@ -19,7 +20,8 @@ const Home = () => {
 
   console.log(data);
   return (
-    <div className=''>
+    <div >
+      {/* <UserListing/> */}
    {data.map((data)=>{return(
     <Cards data={data}/>
    )})}

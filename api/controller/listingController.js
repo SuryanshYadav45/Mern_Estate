@@ -18,10 +18,21 @@ const getListing = async (req, res) => {
         res.status(500).json("error occured")
     }
 }
+const userListing = async (req, res) => {
+    try {
+        const {userid}=req.body;
+        const data = await PropertyModel.find({})
+        res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json("error occured")
+    }
+}
 
 
 
 module.exports = {
     createListing,
-    getListing
+    getListing,
+    userListing
 }
