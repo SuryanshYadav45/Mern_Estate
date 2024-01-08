@@ -20,7 +20,7 @@ const Home = () => {
 
   console.log(data);
   return (
-    <div >
+    <div>
       {/* <UserListing/> */}
    {data.map((data)=>{return(
     <Cards data={data}/>
