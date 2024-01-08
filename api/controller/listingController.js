@@ -20,9 +20,11 @@ const getListing = async (req, res) => {
 }
 const userListing = async (req, res) => {
     try {
-        const {userid}=req.body;
-        const data = await PropertyModel.find({})
-        res.status(200).json(data)
+
+        const data = await PropertyModel.find({ userid: req.params.id });
+        data!=0? res.status(200).json(data):res.status(404).json("no listing found");
+           
+        
     } catch (error) {
         console.log(error)
         res.status(500).json("error occured")
