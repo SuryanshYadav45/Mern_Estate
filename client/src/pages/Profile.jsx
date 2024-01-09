@@ -183,7 +183,7 @@ console.log(expirationDate);
           <button onClick={handledelete} className='text-red-700 capitalize'>delete account</button>
           <button onClick={handlelogout} className='text-red-700 capitalize'>sign out</button>
         </div>
-        <p className='text-center my-6 capitalize text-[#369434]'>show property</p>
+        <Link to="/userproperty" className='text-center  my-6 capitalize text-[#369434]'>show property</Link>
 
       </div>
     </div>

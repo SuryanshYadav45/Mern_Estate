@@ -2,9 +2,9 @@ import React from 'react'
 
 const UserListing = ({data}) => {
   return (
-    <div className='max-w-[700px] h-[80px] flex justify-between p-2 shadow-lg rounded-md m-3'>
+    <div className='max-w-[800px] m-auto h-[80px] flex justify-between p-2 shadow-lg rounded-md my-5'>
         <div className='flex items-center flex-1 '>
-            <img className='w-[100px] h-[100%] bg-cover' src={data.imgurls[0]} alt="" />
+            <img className='w-[100px] h-[100%] bg-cover' src={data.imageurls[0]} alt="" />
             <p className='font-semibold m-auto text-[25px] capitalize'>{data.propname}</p>
         </div>
         <div className='flex flex-col'>

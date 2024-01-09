@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp"
 import Header from './components/Header'
 import PrivateRoute from './components/PrivateRoute'
 import CreateProperty from './pages/CreateProperty'
+import UserProperty from './pages/UserProperty'
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/userproperty' element={<UserProperty />} />
        
       </Routes>
     </Router>
