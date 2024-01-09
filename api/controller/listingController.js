@@ -1,5 +1,6 @@
 const PropertyModel = require("../models/PropertyModel")
 
+
 const createListing = async (req, res) => {
     const { propname, desc, imageurls, userid, furnished, parking, beds, price, address, bathrooms, type } = req.body;
 
@@ -49,6 +50,28 @@ const deleteListing = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json("error occured")
+    } 
+}
+const updateListing = async (req, res) => {
+    try {
+        const{userid}=req.headers;
+        const id=req.params.id
+        const property= await PropertyModel.findById(req.params.id)
+        if(!property)
+        {
+            res.status(404).json("no property found")
+        }
+
+        if(userid!=property.userid){
+            res.status(403).json("You can only delete the listing created by you")
+        }
+       const updatedData= await PropertyModel.findByIdAndUpdate(id,req.body,{new:true})
+       res.status(200).json(updatedData);
+
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json("error occured")
     }
 }
 
@@ -58,5 +81,6 @@ module.exports = {
     createListing,
     getListing,
     userListing,
-    deleteListing
+    deleteListing,
+    updateListing
 }
