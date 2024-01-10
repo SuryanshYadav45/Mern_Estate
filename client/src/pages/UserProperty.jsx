@@ -29,7 +29,9 @@ const UserProperty = () => {
     console.log(property);
   return (
     <div className='w-full '>
-        <ToastContainer className="m" transition={Zoom} />
+        <div>
+        <ToastContainer className="mt-[65px]" transition={Zoom} />
+        </div>
         {
             property?.map((data)=>
             {
