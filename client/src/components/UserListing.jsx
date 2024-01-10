@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { jwtDecode } from 'jwt-decode'
 
@@ -6,6 +6,7 @@ const UserListing = ({data}) => {
   const { currentuser, loading } = useSelector((state) => state.user)
   const decoded = currentuser ? jwtDecode(currentuser.token) : null
   const { id } = decoded || {};
+  const [isdeleted, setisdeleted] = useState(false)
 
   console.log(id);
   const handleDelete=async()=>{
@@ -19,16 +20,28 @@ const UserListing = ({data}) => {
           "userid":id
         })
       })
-      response.status===200?console.log("listing deleted successfully"):console.log("error deleting the listing");
+      if(response.status===200)
+      {
+        console.log("listing deleted successfully");
+        setisdeleted(true);
 
-       
+      }
+      else{
+        console.log("error deleting the listing");
+        setisdeleted(false);
+      }
+
+       if(isdeleted)
+       {
+        return null;
+       }
 
      } catch (error) {
       
      }
   }
 
-  return (
+  return isdeleted?null:(
     <div className='max-w-[800px] m-auto h-[80px] flex justify-between p-2 shadow-lg rounded-md my-5'>
         <div className='flex items-center flex-1 '>
             <img className='w-[100px] h-[100%] bg-cover' src={data.imageurls[0]} alt="" />
