@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { jwtDecode } from 'jwt-decode'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UserListing = ({data}) => {
   const { currentuser, loading } = useSelector((state) => state.user)
@@ -24,11 +26,16 @@ const UserListing = ({data}) => {
       {
         console.log("listing deleted successfully");
         setisdeleted(true);
-
+        toast.success('Property deleted successfully', {
+          position: toast.POSITION.TOP_CENTER
+        });;
       }
       else{
         console.log("error deleting the listing");
         setisdeleted(false);
+        toast.error('Error deleting property', {
+          position: toast.POSITION.TOP_CENTER
+        });;
       }
 
        if(isdeleted)

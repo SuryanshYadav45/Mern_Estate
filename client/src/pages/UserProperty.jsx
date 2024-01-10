@@ -2,6 +2,12 @@ import { jwtDecode } from 'jwt-decode'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import UserListing from '../components/UserListing'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Zoom } from 'react-toastify';
+
+  
+
 
 const UserProperty = () => {
     const [property, setproperty] = useState([])
@@ -23,6 +29,7 @@ const UserProperty = () => {
     console.log(property);
   return (
     <div className='w-full '>
+        <ToastContainer className="m" transition={Zoom} />
         {
             property?.map((data)=>
             {
