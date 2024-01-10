@@ -34,6 +34,7 @@ const userListing = async (req, res) => {
 const deleteListing = async (req, res) => {
     try {
         const{userid}=req.body;
+        console.log(userid);
         const property= await PropertyModel.findById(req.params.id)
         if(!property)
         {
@@ -74,6 +75,7 @@ const updateListing = async (req, res) => {
         res.status(500).json("error occured")
     }
 }
+
 
 
 

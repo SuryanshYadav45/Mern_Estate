@@ -26,7 +26,7 @@ const UserProperty = () => {
         {
             property?.map((data)=>
             {
-                return <UserListing key={data._id} data={data}/>
+                return <UserListing key={data._id} data={data} />
             }
             )
         }
