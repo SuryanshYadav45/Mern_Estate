@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 
 const UserListing = ({data}) => {
+  const navigate=useNavigate();
   const { currentuser, loading } = useSelector((state) => state.user)
   const decoded = currentuser ? jwtDecode(currentuser.token) : null
   const { id } = decoded || {};
@@ -56,7 +58,7 @@ const UserListing = ({data}) => {
         </div>
         <div className='flex flex-col'>
             <button onClick={handleDelete} className='bg-red-600 my-1 rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-red-600 hover:border-red-600 uppercase text-[14px]'>Delete</button>
-            <button className='bg-green-600 my-1 rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-green-600 hover:border-green-600 uppercase text-[14px]'>Edit</button>
+            <button onClick={()=>navigate(`/updatelisting/${data._id}`)} className='bg-green-600 my-1 rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-green-600 hover:border-green-600 uppercase text-[14px]'>Edit</button>
         </div>
     </div>
   )
