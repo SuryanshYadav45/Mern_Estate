@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { jwtDecode } from 'jwt-decode';
+import { useParams } from 'react-router-dom';
+
 
 const UpdateListing = () => {
+    const [property, setproperty] = useState([])
+    const {id}=useParams();
+    
+    useEffect(()=>
+    {
+        const fetchListing=async()=>
+        {
+            const response= await fetch(`http://localhost:4000/listing/getUserListing/${id}`)
+            const data= await response.json();
+            console.log(data);
+            setproperty(data);
+        }
+        fetchListing();
+    },[])
+
+
+
+
     const handlechange=()=>
     {
 
