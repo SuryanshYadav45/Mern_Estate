@@ -7,20 +7,44 @@ import { useParams } from 'react-router-dom';
 const UpdateListing = () => {
     const [property, setproperty] = useState([])
     const {id}=useParams();
-    
+    const [formdata, setformdata] = useState({
+        propname: "",
+        desc: "",
+        address: "",
+        price: 0,
+        beds: 0,
+        bathrooms: 0,
+        parking: false,
+        furnished: false,
+        imageurls: [],
+        type: 'rent',
+        userid:""
+    })
     useEffect(()=>
     {
         const fetchListing=async()=>
         {
             const response= await fetch(`http://localhost:4000/listing/getUserListing/${id}`)
             const data= await response.json();
-            console.log(data);
-            setproperty(data);
+            setformdata({
+                propname: data.propname,
+                desc: data.desc,
+                address: data.address,
+                price: data.price,
+                beds: data.beds,
+                bathrooms: data.bathrooms,
+                parking: data.parking,
+                furnished: data.furnished,
+                imageurls: data.imageurls,
+                type: data.type,
+                userid: id
+            })
         }
         fetchListing();
     },[])
 
 
+    console.log(formdata)
 
 
     const handlechange=()=>
