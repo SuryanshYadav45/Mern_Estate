@@ -74,6 +74,13 @@ const updateListing = async (req, res) => {
         res.status(500).json("error occured")
     }
 }
+const getUserListing=async(req,res)=>
+{
+    const listing=await  PropertyModel.findById(req.params.id);
+
+    listing?res.status(200).json(listing):res.status(404).json("no listing found");
+
+}
 
 
 
@@ -83,5 +90,6 @@ module.exports = {
     getListing,
     userListing,
     deleteListing,
-    updateListing
+    updateListing,
+    getUserListing
 }
