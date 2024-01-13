@@ -160,7 +160,7 @@ const CreateProperty = () => {
                         <div><input onChange={handlechange} required id='bathrooms' className="w-[80%] shadow-lg my-2 mx-1 rounded-md  h-[45px]  border focus:outline-none focus:ring-[#6EB5AA] focus:border-[#6EB5AA] p-2" type="number" /><span className='text-gray-700'>Baths</span></div>
                     </div>
                     <div>
-                        <input onChange={handlechange} id='price' required className=' shadow-lg my-4 rounded-md  h-[45px] mx-1 border focus:outline-none focus:ring-[#6EB5AA] focus:border-[#6EB5AA] p-2' type="number" name="" /> <span>Regular Price ($/Month)</span>
+                        <input onChange={handlechange} id='price' required className=' shadow-lg my-4 rounded-md  h-[45px] mx-1 border focus:outline-none focus:ring-[#6EB5AA] focus:border-[#6EB5AA] p-2' type="number" name="" /> <span>Regular Price (₹/Month)</span>
                     </div>
 
                 </div>
