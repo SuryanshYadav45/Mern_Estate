@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { jwtDecode } from 'jwt-decode';
-import { useParams } from 'react-router-dom';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable, } from "firebase/storage"
+import { app } from "../firebase.js";
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import ImageComponent from '../components/ImageComponent';
+import { jwtDecode } from 'jwt-decode';
+import { useSelector } from 'react-redux';
 
 
 const UpdateListing = () => {
-    const { id } = useParams();
+    const { listingid } = useParams();
+    const [files, setfiles] = useState([]);
+    const navigate=useNavigate();
+    const { currentuser, loading } = useSelector((state) => state.user)
+    const decoded = currentuser ? jwtDecode(currentuser.token) : null
+    const { id } = decoded || {};
     const [formdata, setformdata] = useState({
         propname: "",
         desc: "",
@@ -22,7 +29,7 @@ const UpdateListing = () => {
     })
     useEffect(() => {
         const fetchListing = async () => {
-            const response = await fetch(`http://localhost:4000/listing/getUserListing/${id}`)
+            const response = await fetch(`http://localhost:4000/listing/getUserListing/${listingid}`)
             const data = await response.json();
             setformdata({
                 propname: data.propname,
@@ -67,13 +74,84 @@ const UpdateListing = () => {
             })
         }
     }
-    const handleImageSubmit = () => {
+    const storeImage = async (file) => {
+        return new Promise((resolve, reject) => {
+            const storage = getStorage(app);
+            const fileName = new Date().getTime() + file.name;
+            const storageRef = ref(storage, `property/` + fileName);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress =
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(`Upload is ${progress}% done`);
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                }
+            );
+        });
+    };
+
+    const handleImageSubmit = (e) => {
+        if (files.length > 0 && files.length + formdata.imageurls.length < 7) {
+
+            const promises = [];
+
+            for (let i = 0; i < files.length; i++) {
+                promises.push(storeImage(files[i]));
+            }
+            Promise.all(promises)
+                .then((urls) => {
+                    setformdata({
+                        ...formdata,
+                        imageurls: formdata.imageurls.concat(urls),
+                    });
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+        } else {
+            console.log("error occured");
+        }
+    };
+
+    const updatelisting = async() => {
+        try {
+            const response= await fetch(`http://localhost:4000/listing/updatelisting/${listingid}`,
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "userid":id
+            },
+            body:JSON.stringify(formdata)
+        })
+
+        if(response.status==200)
+        {
+            navigate("/userproperty");
+        }
+        } catch (error) {
+            console.log(error);
+        }
 
     }
-
-    const createlisting = () => {
-
-    }
+    const handleImageDelete = (urlToDelete) => {
+        setformdata((prevData) => {
+          const updatedImageUrls = prevData.imageurls.filter((url) => url !== urlToDelete);
+          return {
+            ...prevData,
+            imageurls: updatedImageUrls,
+          };
+        });
+      };
 
     return (
         <div className='w-full lg:h-[calc(100vh-72px)] bg-gray-200 p-2'>
@@ -128,11 +206,11 @@ const UpdateListing = () => {
                         <input onChange={(e) => setfiles(e.target.files)} className='p-2 w-[65%]  border border-gray-400' type="file" multiple />
                         <button onClick={handleImageSubmit} className='w-[30%] border border-green-700 text-green-700 px-4 py-2 rounded focus:outline-none focus:border-green-700 focus:text-green-700'>Upload</button>
                     </div>
-                    <button onClick={createlisting} className='w-full h-[45px] rounded-md bg-[#6EB5AA] text-white font-semibold my-2 p-2 capitalize'>update Property</button>
+                    <button onClick={updatelisting} className='w-full h-[45px] rounded-md bg-[#6EB5AA] text-white font-semibold my-2 p-2 capitalize'>update Property</button>
 
                     {formdata.imageurls.map((url, index) => (
-                        <ImageComponent key={index} data={url} />
-                    ))}
+                        <ImageComponent key={index} data={url} onDelete={handleImageDelete} />
+                    ))} 
                 </div>
             </div>
         </div>
