@@ -33,14 +33,13 @@ const userListing = async (req, res) => {
 }
 const deleteListing = async (req, res) => {
     try {
-        const{userid}=req.body;
-        const property= await PropertyModel.findById(req.params.id)
-        if(!property)
-        {
+        const { userid } = req.body;
+        const property = await PropertyModel.findById(req.params.id)
+        if (!property) {
             res.status(404).json("no property found")
         }
 
-        if(userid!=property.userid){
+        if (userid != property.userid) {
             res.status(403).json("You can only delete the listing created by you")
         }
         await PropertyModel.findByIdAndDelete(req.params.id);
@@ -50,23 +49,22 @@ const deleteListing = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json("error occured")
-    } 
+    }
 }
 const updateListing = async (req, res) => {
     try {
-        const{userid}=req.headers;
-        const id=req.params.id
-        const property= await PropertyModel.findById(req.params.id)
-        if(!property)
-        {
+        const { userid } = req.headers;
+        const id = req.params.id
+        const property = await PropertyModel.findById(req.params.id)
+        if (!property) {
             res.status(404).json("no property found")
         }
 
-        if(userid!=property.userid){
+        if (userid != property.userid) {
             res.status(403).json("You can only delete the listing created by you")
         }
-       const updatedData= await PropertyModel.findByIdAndUpdate(id,req.body,{new:true})
-       res.status(200).json(updatedData);
+        const updatedData = await PropertyModel.findByIdAndUpdate(id, req.body, { new: true })
+        res.status(200).json(updatedData);
 
 
     } catch (error) {
@@ -74,13 +72,27 @@ const updateListing = async (req, res) => {
         res.status(500).json("error occured")
     }
 }
-const getUserListing=async(req,res)=>
-{
-    const listing=await  PropertyModel.findById(req.params.id);
+const getUserListing = async (req, res) => {
+    const listing = await PropertyModel.findById(req.params.id);
 
-    listing?res.status(200).json(listing):res.status(404).json("no listing found");
+    listing ? res.status(200).json(listing) : res.status(404).json("no listing found");
 
 }
+const searchListing = async (req, res) => {
+    const searchTerm = req.query.q;
+
+    try {
+        const results = await PropertyModel.find({
+            $text: { $search: searchTerm },
+        });
+
+        res.json(results);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 
 
 
@@ -91,5 +103,6 @@ module.exports = {
     userListing,
     deleteListing,
     updateListing,
-    getUserListing
+    getUserListing,
+    searchListing
 }
