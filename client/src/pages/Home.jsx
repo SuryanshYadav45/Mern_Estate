@@ -20,7 +20,7 @@ const Home = () => {
 
   console.log(data);
   return (
-    <div>
+    <div className='flex flex-wrap m-auto'>
       {/* <UserListing/> */}
    {data.map((data)=>{return(
     <Cards data={data}/>

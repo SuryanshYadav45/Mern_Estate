@@ -21,6 +21,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "stripe": "^14.12.0"
   }
 }
