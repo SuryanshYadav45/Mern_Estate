@@ -20,9 +20,7 @@ const Cards = ({ data }) => {
               price: '74653',
               quantity: 2,
             },]
-            // Add more items as needed
-          
-        }),
+           }),
       });
 
       if (response.ok) {
