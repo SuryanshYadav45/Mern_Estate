@@ -31,6 +31,7 @@ const userListing = async (req, res) => {
         res.status(500).json("error occured")
     }
 }
+
 const deleteListing = async (req, res) => {
     try {
         const { userid } = req.body;

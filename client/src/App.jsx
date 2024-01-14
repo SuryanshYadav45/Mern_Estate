@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute'
 import CreateProperty from './pages/CreateProperty'
 import UserProperty from './pages/UserProperty'
 import UpdateListing from './pages/UpdateListing'
+import Property from './pages/Property'
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/userproperty' element={<UserProperty />} />
         <Route path='/updatelisting/:listingid' element={<UpdateListing/>} />
+        <Route path='/property/:id' element={<Property/>} />
        
       </Routes>
     </Router>

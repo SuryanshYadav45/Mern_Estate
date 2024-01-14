@@ -2,8 +2,10 @@ import React from 'react'
 import { FaLocationDot } from "react-icons/fa6";
 import { IoBed } from "react-icons/io5";
 import { BiSolidBath } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 
 const Cards = ({ data }) => {
+const navigate=useNavigate();
   const checkout= async()=>
   {
     try {
@@ -35,7 +37,7 @@ const Cards = ({ data }) => {
     }
   }
   return (
-    <div className="w-[330px] m-2 h-[470px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
+    <div onClick={()=>navigate(`/property/${data._id}`)} className="w-[330px] m-2 h-[490px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden cursor-pointer">
 
       <img className="rounded-t-lg h-[55%] bg-cover w-full hover:scale-[1.1] transition-all duration-500" src={data.imageurls[0]} alt="" />
 
