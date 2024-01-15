@@ -27,8 +27,8 @@ const Property = () => {
 
   return (
    <div className='w-full'>
-    <div className='flex flex-col max-w-[1300px]  m-auto '>
-    <div className='w-[100%] p-2'>
+    <div className='flex flex-col max-w-[1300px]  m-auto med:flex-row '>
+    <div className='w-[100%] p-2 med:w-[60%]'>
          <Swiper
          
         cssMode={true}
@@ -47,26 +47,26 @@ const Property = () => {
         
       </Swiper>
     </div>
-    <div className='w-[100%] p-2 '>
-      <h1 className='text-black font-bold text-[30px] capitalize py-2' >{property.propname}</h1>
+    <div className='w-[100%] p-2 med:w-[40%]'>
+      <h1 className='text-[#4f998e] font-bold text-[30px] capitalize py-2' >{property.propname}</h1>
       <p className='text-[16px] flex items-center'><FaLocationDot color='green' />{property.address}</p>
       <p className='text-justify text-[16px] py-2'>{property.desc}</p>
       <div className='flex my-2'>
-        <p className='capitalize  text-[20px]'>beds: <span className='font-bold'>{property.beds}</span></p>
-        <p className='capitalize mx-5 text-[20px]'>bathroom: <span className='font-bold'>{property.bathrooms}</span></p> 
+        <p className='capitalize  text-[20px] text-[#3d877c] font-semibold'>beds: <span className='font-bold text-[#403d3d]'>{property.beds}</span></p>
+        <p className='capitalize mx-5 text-[20px] text-[#3d877c] font-semibold'>bathroom: <span className='font-bold text-[#403d3d]'>{property.bathrooms}</span></p> 
         
       </div>
       <div className="flex">
-      <label htmlFor="furnished" className='capitalize text-[20px] flex items-center'> furnished:
+      <label htmlFor="furnished" className='capitalize text-[20px] flex items-center text-[#3d877c] font-semibold'> furnished:
         <input id='furnished' className='w-[20px] h-[20px] mx-2' name='furnished' checked={property.furnished} type="checkbox"/>
         </label>
-        <label className='ms-6 capitalize text-[20px] flex items-center ' htmlFor="parking" > parking:
+        <label className='ms-6 capitalize text-[20px] flex items-center text-[#3d877c] font-semibold' htmlFor="parking" > parking:
         <input id='parking' name='parking' className='w-[20px] h-[20px] mx-2' checked={property.parking} type="checkbox" />
         </label>
       </div>
       
-      <p className='capitalize text-[20px] my-4'>type: <span className='font-bold'>{property.type}</span></p>
-      <p className='capitalize text-[20px]'>price: <span className='font-bold'>{property.price}</span> </p>
+      <p className='capitalize text-[20px] my-4 font-semibold text-[#3d877c] '>type: <span className='font-bold text-[#403d3d]'>{property.type}</span></p>
+      <p className='capitalize text-[20px] font-semibold text-[#3d877c]'>price: <span className='font-bold text-[#403d3d]'>{property.price}</span> </p>
 
       {
         property.type==="rent"?<button className='w-[140px] h-[50px] my-5 rounded-md bg-[#398b7f] text-white'>Rent</button>
