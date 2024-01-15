@@ -9,7 +9,8 @@ export default {
       screens:{
         'smlg':'750px',
         'moblg':'400px',
-        'tabl':'650px'
+        'tabl':'650px',
+        'med':"850px"
       }
     },
   },
