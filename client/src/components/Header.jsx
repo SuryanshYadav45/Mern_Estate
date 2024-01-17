@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaSearch, FaBars, FaCross } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import {useSelector} from "react-redux"
 import {useDispatch} from "react-redux"
@@ -11,7 +11,9 @@ import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [Query, setQuery] = useState('')
   const dispatch=useDispatch();
+  const navigate=useNavigate();
   const {currentuser}=useSelector((state)=>state.user);
   
   const decoded=currentuser && currentuser.token? jwtDecode(currentuser.token):null
@@ -20,6 +22,12 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
+
+  const handleSearch= (e)=>
+  {
+    e.preventDefault();
+    navigate(`/search?q=${encodeURIComponent(Query)}`)
+  }
 
   return (
     <header className='py-4 px-5 bg-[#6eb5aa]'>
@@ -37,8 +45,8 @@ const Header = () => {
 
         {/* Navigation for Large Screens */}
         <div className={` hidden smlg:flex items-center space-x-4 ${menuVisible ? 'flex' : 'hidden'}`}>
-          <form className='flex items-center rounded-xl p-1 bg-white'>
-            <input type="text" placeholder='Search.....' className='rounded-xl w-[250px] px-[10px] py-[5px] outline-none' />
+          <form className='flex items-center rounded-xl p-1 bg-white' onSubmit={handleSearch}>
+            <input type="text" placeholder='Search.....' className='rounded-xl w-[250px] px-[10px] py-[5px] outline-none' onChange={(e)=>setQuery(e.target.value)}/>
             <FaSearch size={25} className='text-[#1b5051]' />
           </form>
           </div>
@@ -61,8 +69,8 @@ const Header = () => {
             
           <div className='smlg:hidden fixed top-[72px] bg-[#a9c2be] left-0 w-full h-full  flex  justify-center transition-all duration-300 ease-in-out'>
             <div className=' w-full p-4 rounded-md'>
-              <form className='flex items-center mb-4 bg-white rounded'>
-                <input type="text" placeholder='Search.....' className='rounded-xl w-[90%] px-[10px] py-[5px] outline-none' />
+              <form className='flex items-center mb-4 bg-white rounded' onSubmit={handleSearch} >
+                <input type="text" placeholder='Search.....' className='rounded-xl w-[90%] px-[10px] py-[5px] outline-none' onChange={(e)=>setQuery(e.target.value)} />
                 <FaSearch size={25} className='text-[#1b5051]' />
               </form>
 

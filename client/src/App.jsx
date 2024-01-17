@@ -11,6 +11,7 @@ import CreateProperty from './pages/CreateProperty'
 import UserProperty from './pages/UserProperty'
 import UpdateListing from './pages/UpdateListing'
 import Property from './pages/Property'
+import Search from './pages/Search'
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         <Route path='/userproperty' element={<UserProperty />} />
         <Route path='/updatelisting/:listingid' element={<UpdateListing/>} />
         <Route path='/property/:id' element={<Property/>} />
+        <Route path='/search' element={<Search/>} />
        
       </Routes>
     </Router>
