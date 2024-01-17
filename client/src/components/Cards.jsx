@@ -36,6 +36,8 @@ const navigate=useNavigate();
       console.error('Error:', error.message);
     }
   }
+ 
+
   return (
     <div onClick={()=>navigate(`/property/${data._id}`)} className="w-[330px] m-2 h-[490px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden cursor-pointer">
 
@@ -45,7 +47,7 @@ const navigate=useNavigate();
         <h6 className='text-[#2b5f57]  font-semibold text-[18px] capitalize'>{data.propname}</h6>
         <p className="my-1 text-[14px] text-gray-700 capitalize flex items-center"> <FaLocationDot color='green' /> {data.address}</p>
         <p className="text-gray-700 text-[15px] my-1  line-clamp-3 text-justify" >{data.desc}</p>
-        <p className='font-bold text-[#1e5e1e]'>₹{data.price}</p>
+        <p className='font-bold text-[#1e5e1e]'>₹{data?.price?.toLocaleString("en-IN")}</p>
         <div className='flex my-2 justify-between'>
           <div className='flex'>
             <span className='flex items-center me-2'>{data.beds} <IoBed className='mx-1' size={20} color='#2b5f57' /></span>
