@@ -48,9 +48,8 @@ const propertySchema= new mongoose.Schema({
     }
 
 },{timestamps:true})
-propertySchema.index({
-    propname: 'text'
-});
+
+propertySchema.index({propname: 'text'});
 
 const PropertyModel= mongoose.model('properties',propertySchema);
 

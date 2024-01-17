@@ -81,11 +81,9 @@ const getUserListing = async (req, res) => {
 }
 const searchListing = async (req, res) => {
     const searchTerm = req.query.q;
-
     try {
-        const results = await PropertyModel.find({
-            $text: { $search: searchTerm },
-        });
+        const searchRegex = new RegExp(searchTerm,'i');
+        const results = await PropertyModel.find({propname:searchRegex});
 
         res.json(results);
     } catch (error) {
