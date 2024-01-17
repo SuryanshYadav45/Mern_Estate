@@ -5,6 +5,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { signinEnd,signinStart } from '../redux/slice/userSlice';
 import { css } from '@emotion/react';
 import { PulseLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const {loading}=useSelector((state)=>state.user)
@@ -43,6 +45,9 @@ const SignUp = () => {
     const data=await res.json();
     dispatch(signinEnd(null));
     if(res.status===201){
+       toast.success('User Created Successfully', {
+        position: toast.POSITION.TOP_CENTER
+      });;
       navigate('/signin')
     }
     console.log(res);

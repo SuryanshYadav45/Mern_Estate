@@ -12,14 +12,18 @@ import UserProperty from './pages/UserProperty'
 import UpdateListing from './pages/UpdateListing'
 import Property from './pages/Property'
 import Search from './pages/Search'
-
+import { Zoom } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
 
   return (<>
+  
     <Router>
       <Header/>
+      
       <Routes>
         <Route  element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>}/>
@@ -38,6 +42,7 @@ const App = () => {
         <Route path='/search' element={<Search/>} />
        
       </Routes>
+      <ToastContainer className="mt-[65px] z-40" transition={Zoom} />
     </Router>
   </>
   )

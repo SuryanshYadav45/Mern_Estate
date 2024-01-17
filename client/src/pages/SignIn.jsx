@@ -5,7 +5,8 @@ import { PulseLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import {signinEnd,signinStart} from ".././redux/slice/userSlice.js"
 import GoogleAuth from '../components/GoogleAuth.jsx';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SignIn = () => {
   const dispatch=useDispatch();
   const {loading} = useSelector((state) => state.user);
@@ -50,6 +51,9 @@ const SignIn = () => {
     if(response.status===200)
     {
       navigate('/')
+      toast.success('Logged in Successfully', {
+        position: toast.POSITION.TOP_CENTER
+      });;
     }
     } catch (error) {
       console.log(error)

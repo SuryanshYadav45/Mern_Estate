@@ -6,6 +6,7 @@ import { css } from '@emotion/react';
 import { PulseLoader } from 'react-spinners';
 import {signinStart,signinEnd} from "../redux/slice/userSlice.js"
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const GoogleAuth = (props) => {
   const naviagte=useNavigate();
@@ -41,6 +42,9 @@ const GoogleAuth = (props) => {
             dispatch(signinEnd(data));
             if(response.status===200)
             {
+              toast.success('Logged in Successfully', {
+                position: toast.POSITION.TOP_CENTER
+              });;
               naviagte('/')
             }
         } catch (error) {
