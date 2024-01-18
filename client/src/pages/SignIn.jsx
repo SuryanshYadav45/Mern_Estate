@@ -33,43 +33,46 @@ const SignIn = () => {
     }));
   };
 
+
+  const handleSignInResponse = (status) => {
+    switch (status) {
+      case 200:
+        toast.success('Logged in Successfully', { position: toast.POSITION.TOP_CENTER });
+        navigate('/');
+        break;
+      case 401:
+        toast.error('Wrong Password', { position: toast.POSITION.TOP_CENTER });
+        break;
+      case 404:
+        toast.error('User Not Found', { position: toast.POSITION.TOP_CENTER });
+        dispatch(logout());
+        break;
+      default:
+        // Handle other status codes if needed
+        break;
+    }
+  };
+
   const handleSubmit=async(e)=>
   {
     e.preventDefault();
-    
+
     try {
       dispatch(signinStart());
-      const response=await fetch("http://localhost:4000/auth/signin",{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(formData)
-    })
-    const data= await response.json();
-    dispatch(signinEnd(data));
-    if(response.status===200)
-    {
-      navigate('/')
-      toast.success('Logged in Successfully', {
-        position: toast.POSITION.TOP_CENTER
+      const response = await fetch("http://localhost:4000/auth/signin", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }
-    else if(response.status===401)
-    {
-      toast.error('Wrong Password',{
-        position:toast.POSITION.TOP_CENTER
-      });
-    }
-    else if(response.status===404)
-    {
-      toast.error("User Not Found",{
-        position:toast.POSITION.TOP_CENTER
-      })
-      dispatch(logout());
-    }
+  
+      const data = await response.json();
+      dispatch(signinEnd(data));
+  
+      handleSignInResponse(response.status);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   return (
