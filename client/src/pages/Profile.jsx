@@ -5,12 +5,14 @@ import { jwtDecode } from "jwt-decode";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase.js";
 import {  Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const [file, setfile] = useState();
   const [upPer, setupPer] = useState(0)
+  const[Upload,setUpload]=useState(false);
   const [formdata, setformdata] = useState({
     username: '',
     email: '',
@@ -38,14 +40,6 @@ console.log(expirationDate);
       }
     }
   },[decoded])
-
-
-
-  
-  
-  
-  
-
   useEffect(() => {
 
     if (decoded) {
@@ -63,6 +57,7 @@ console.log(expirationDate);
   }, [file])
 
   const handleImageUpload = (file) => {
+    setUpload(true);
     try {
       const storage = getStorage(app);
       const filename = new Date().getTime() + file.name;
@@ -77,7 +72,7 @@ console.log(expirationDate);
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(progress)
-          setupPer(progress);
+          setupPer( Math.round(progress));
 
           switch (snapshot.state) {
             case 'paused':
@@ -91,6 +86,7 @@ console.log(expirationDate);
         (error) => {
           // Handle unsuccessful uploads
           console.log(error);
+          setUpload(false)
         },
         () => {
           // Handle successful uploads on complete
@@ -100,8 +96,11 @@ console.log(expirationDate);
               ...prevformData,
               photourl: downloadURL,
             }));
+            setUpload(false);
             console.log('File available at', downloadURL);
           });
+          
+          
         }
       );
     } catch (error) {
@@ -133,6 +132,9 @@ console.log(expirationDate);
       setTimeout(async ()=>{
         const data = await response.json();
         dispatch(signinEnd(data));
+        toast.success("User Updated Successfully",{
+          position:toast.POSITION.TOP_CENTER
+        })
       },1000)
       console.log(data);
     } catch (error) {
@@ -141,6 +143,9 @@ console.log(expirationDate);
   }
 
   const handlelogout=()=>{
+    toast.success("User Logged Out",{
+      position:toast.POSITION.TOP_CENTER
+    })
     dispatch(logout());
   }
 
@@ -154,7 +159,11 @@ console.log(expirationDate);
       setTimeout(()=>{
         dispatch(logout());
       navigate('/');
+      toast.success("Account Deleted",{
+        position:toast.POSITION.TOP_CENTER
+      })
       },1000)
+      
       
     }
   }
@@ -167,7 +176,9 @@ console.log(expirationDate);
       <div className='max-w-[600px]  m-auto '>
         <h1 className='capitalize text-center font-semibold text-[25px] tabl:text-[40px] my-4'>profile</h1>
         <input type="file" onChange={(e) => setfile(e.target.files[0])} hidden ref={fileref} accept='image/*' />
+        {}
         <img src={formdata.photourl} onClick={() => fileref.current.click()} className='mx-auto my-3 rounded-full w-[80px] h-[80px] lg:w-[140px] lg:h-[140px] tabl:w-[120px] tabl:h-[120px] cursor-pointer' alt="" />
+        {setUpload&&<p className='text-center'>Uploading:{upPer+"%"}</p>}
         <form onSubmit={handleUpdate} className='flex justify-center flex-col items-center'>
           <input defaultValue={formdata.username} onChange={handlechange} name='username' type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
 
