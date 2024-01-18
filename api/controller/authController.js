@@ -26,23 +26,35 @@ const signup = async (req, res) => {
     res.status(500).json(error.message)
   }
 }
+
 const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await UserModel.findOne({ email })
-    !user ? res.status(404).send("User not found") : null;
-    const ValidUser = await bcrypt.compare(password, user.password)
-    if (ValidUser) {
-      const token = jwt.sign({ id: user._id, username: user.username ,photoUrl:user.photoUrl,email:user.email }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
-      res.status(200).json({ token });
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json("User not found");
     }
 
+    const validUser = await bcrypt.compare(password, user.password);
+
+    if (validUser) {
+      const token = jwt.sign(
+        { id: user._id, username: user.username, photoUrl: user.photoUrl, email: user.email },
+        process.env.TOKEN_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      res.status(200).json({ token });
+    } else {
+      res.status(401).json("Incorrect password");
+    }
   } catch (error) {
-    console.log(error)
-    res.status(404).json({message:"user not found"})
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 const googleSignin = async (req, res) => {
   const { idToken } = req.body;

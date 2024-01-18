@@ -3,7 +3,7 @@ import { Link,useNavigate } from "react-router-dom";
 import { css } from '@emotion/react';
 import { PulseLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
-import {signinEnd,signinStart} from ".././redux/slice/userSlice.js"
+import {logout, signinEnd,signinStart} from ".././redux/slice/userSlice.js"
 import GoogleAuth from '../components/GoogleAuth.jsx';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -53,7 +53,20 @@ const SignIn = () => {
       navigate('/')
       toast.success('Logged in Successfully', {
         position: toast.POSITION.TOP_CENTER
-      });;
+      });
+    }
+    else if(response.status===401)
+    {
+      toast.error('Wrong Password',{
+        position:toast.POSITION.TOP_CENTER
+      });
+    }
+    else if(response.status===404)
+    {
+      toast.error("User Not Found",{
+        position:toast.POSITION.TOP_CENTER
+      })
+      dispatch(logout());
     }
     } catch (error) {
       console.log(error)
