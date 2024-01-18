@@ -53,7 +53,7 @@ const Header = () => {
           <div className={`hidden smlg:flex items-center space-x-4 ${menuVisible ? 'flex' : 'hidden'}`}>
           <ul className='flex gap-4'>
             <Link className="flex items-center justify-center" to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
-            <Link className="flex items-center justify-center" to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
+            <Link  className="flex items-center justify-center" to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
             {currentuser?
             <Link to="/profile"><img className='rounded-full w-12 h-12 border-2 cursor-pointer ' src={photoUrl}/></Link>
             
@@ -75,9 +75,9 @@ const Header = () => {
               </form>
 
               <ul className='flex flex-col gap-2'>
-                <Link  to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
-                <Link  to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
-                <Link  to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link></ul>           </div>
+                <Link onClick={()=>setMenuVisible(!menuVisible)} to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
+                <Link onClick={()=>setMenuVisible(!menuVisible)}  to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
+                <Link onClick={()=>setMenuVisible(!menuVisible)} to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link></ul>           </div>
           </div>
           </>
         )}
