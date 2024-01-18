@@ -178,7 +178,7 @@ console.log(expirationDate);
         <input type="file" onChange={(e) => setfile(e.target.files[0])} hidden ref={fileref} accept='image/*' />
         {}
         <img src={formdata.photourl} onClick={() => fileref.current.click()} className='mx-auto my-3 rounded-full w-[80px] h-[80px] lg:w-[140px] lg:h-[140px] tabl:w-[120px] tabl:h-[120px] cursor-pointer' alt="" />
-        {setUpload&&<p className='text-center'>Uploading:{upPer+"%"}</p>}
+        {Upload&&<p className='text-center'>Uploading:{upPer+"%"}</p>}
         <form onSubmit={handleUpdate} className='flex justify-center flex-col items-center'>
           <input defaultValue={formdata.username} onChange={handlechange} name='username' type="text" className=' w-full text-[14px] my-3 h-10 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[380px] tabl:w-[500px] lg:w-[500px] moblg:text-[18px]' placeholder='username' />
 
