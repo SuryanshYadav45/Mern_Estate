@@ -172,8 +172,8 @@ console.log(expirationDate);
   console.log(upPer + "%");
   console.log(formdata)
   return (
-    <div className='w-full h-[calc(100vh-72px)] bg-gray-200 p-2'>
-      <div className='max-w-[600px]  m-auto '>
+    <div className='w-full h-[calc(100vh-72px)]  bg-gray-200 p-2'>
+      <div className='max-w-[600px]  m-auto'>
         <h1 className='capitalize text-center font-semibold text-[25px] tabl:text-[40px] my-4'>profile</h1>
         <input type="file" onChange={(e) => setfile(e.target.files[0])} hidden ref={fileref} accept='image/*' />
         {}

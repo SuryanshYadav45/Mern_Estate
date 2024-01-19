@@ -6,7 +6,8 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 
 const CreateProperty = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const [uploading, setuploading] = useState(false)
     const { currentuser, loading } = useSelector((state) => state.user)
     console.log(currentuser)
     const decoded = currentuser ? jwtDecode(currentuser.token) : null
@@ -77,7 +78,8 @@ const CreateProperty = () => {
         });
     };
 
-    const handleImageSubmit = (e) => {
+    const handleImageSubmit = () => {
+    setuploading(true);
         if (files.length > 0 && files.length + formdata.imageurls.length < 7) {
 
             const promises = [];
@@ -87,6 +89,7 @@ const CreateProperty = () => {
             }
             Promise.all(promises)
                 .then((urls) => {
+                    setuploading(false);
                     setformdata({
                         ...formdata,
                         imageurls: formdata.imageurls.concat(urls),
@@ -111,8 +114,8 @@ const CreateProperty = () => {
             body: JSON.stringify(formdata)
         })
         if (response.status == 201) {
-                navigate('/profile');
-          
+            navigate('/profile');
+
         }
 
     }
@@ -168,7 +171,11 @@ const CreateProperty = () => {
                     <p className='text-gray-700 m-2'><b className='text-black mx-[2px]'>Images:</b>The first image will be cover (max-6) </p>
                     <div className="flex justify-between p-2">
                         <input onChange={(e) => setfiles(e.target.files)} className='p-2 w-[65%]  border border-gray-400' type="file" multiple />
-                        <button onClick={handleImageSubmit} className='w-[30%] border border-green-700 text-green-700 px-4 py-2 rounded focus:outline-none focus:border-green-700 focus:text-green-700'>Upload</button>
+                        <button onClick={handleImageSubmit} className='w-[30%] border flex justify-center items-center border-green-700 text-green-700 px-4 py-2 rounded focus:outline-none focus:border-green-700 focus:text-green-700'>
+                            {uploading ? <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+                                <circle className="opacity-[0]" cx="12" cy="12" r="10" stroke-width="4"></circle>
+                                <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.416A7.96 7.96 0 014 12H0c0 6.627 5.373 12 12 12v-4c-3.313 0-6.055-2.09-7.097-5.002z"></path>
+                            </svg> : "Upload"}</button>
                     </div>
                     <button onClick={createlisting} className='w-full h-[45px] rounded-md bg-[#6EB5AA] text-white font-semibold my-2 p-2'>Create Property</button>
                 </div>
