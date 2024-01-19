@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Cards from '../components/Cards'
-import UserListing from '../components/UserListing'
 
 const Home = () => {
+  const [data, setdata] = useState([])
 
-  const [data,setdata] = useState([])
-
-  useEffect(()=>
-  {
-    const fetchdata=async()=>{
-      const respone=await fetch('http://localhost:4000/listing/getlisting')
-      const data =await respone.json();
+  useEffect(() => {
+    const fetchdata = async () => {
+      const respone = await fetch('http://localhost:4000/listing/getlisting')
+      const data = await respone.json();
       setdata(data);
-
-      
     }
     fetchdata();
-  },[])
+  }, [])
 
-  console.log(data);
   return (
-    <div className='grid grid-cols-4 gap-5'>
-      {/* <UserListing/> */}
-   {data.map((data)=>{return(
-    <Cards data={data}/>
-   )})}
+    <div className=''>
+
+      <div>
+        <h3>Beginning of something new starts with buying new </h3>
+      </div>
+
+      {data.map((data) => {
+        return (
+          <Cards data={data} />
+        )
+      })}
     </div>
   )
 }
