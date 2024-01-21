@@ -39,7 +39,7 @@ const navigate=useNavigate();
  
 
   return (
-    <div onClick={()=>navigate(`/property/${data._id}`)} className="w-[280px] m-2 h-[350px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden cursor-pointer">
+    <div onClick={()=>navigate(`/property/${data._id}`)} className="w-[250px] m-2 h-[350px] bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden cursor-pointer">
 
       <img className="rounded-t-lg h-[45%] bg-cover w-full hover:scale-[1.1] transition-all duration-500" src={data.imageurls[0]} alt="" />
 
