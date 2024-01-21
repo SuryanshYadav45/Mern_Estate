@@ -67,7 +67,7 @@ const Header = () => {
             <>
 
             
-          <div className='smlg:hidden fixed top-[72px] bg-[#a9c2be] left-0 w-full h-full  flex  justify-center transition-all duration-300 ease-in-out'>
+          <div className='smlg:hidden fixed top-[72px] bg-[#a9c2be] left-0 w-full h-full  flex  justify-center transition-all duration-300 ease-in-out z-50'>
             <div className=' w-full p-4 rounded-md'>
               <form className='flex items-center mb-4 bg-white rounded' onSubmit={handleSearch} >
                 <input type="text" placeholder='Search.....' className='rounded-xl w-[90%] px-[10px] py-[5px] outline-none' onChange={(e)=>setQuery(e.target.value)} />

@@ -9,6 +9,7 @@ export default {
       screens:{
         'smlg':'750px',
         'moblg':'400px',
+        'mobxl':"550px",
         'tabl':'650px',
         'med':"850px"
       }
