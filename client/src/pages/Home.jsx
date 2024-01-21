@@ -3,19 +3,24 @@ import CarouselComponent from '../components/CarouselComponent'
 
 const Home = () => {
   const [data, setdata] = useState([])
-
+  const [rent, setrent] = useState([])
+  const [buy, setbuy] = useState([])
   useEffect(() => {
     const fetchdata = async () => {
       const respone = await fetch('http://localhost:4000/listing/getlisting')
       const data = await respone.json();
+      const rentListings = data.filter((item) => item.type === 'rent');
+      const buyListings = data.filter((item) => item.type === 'sell');
+
+      setrent(rentListings);
+      setbuy(buyListings);
       setdata(data);
     }
     fetchdata();
   }, [])
 
-
-
-
+  console.log(rent);
+  console.log(buy);
   return (
     <div className="relative bg-[rgba(72,71,71,0.1)]">
       <div
@@ -35,12 +40,12 @@ const Home = () => {
       <div className="max-w-[1150px] mx-auto">
         <div className='py-3'>
           <h4 className='font-bold ml-4 underline'>Rent Property</h4>
-          <CarouselComponent data={data} />
+          <CarouselComponent data={rent} />
         </div>
 
         <div>
           <h4 className='font-bold ml-4 underline'>Buy Property</h4>
-          <CarouselComponent data={data} />
+          <CarouselComponent data={buy} />
         </div>
 
       </div>

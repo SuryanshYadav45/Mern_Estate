@@ -54,8 +54,8 @@ const navigate=useNavigate();
             <span className='flex items-center text-[13px] ms-2'>{data.bathrooms} <BiSolidBath className='mx-1' size={20} color='#2b5f57' /></span>
           </div>
 
-          {data.type === "rent" ? <button onClick={checkout} className='w-[80px] h-[35px] rounded-md bg-[#398b7f] text-white'>Rent</button>
-            : <button onClick={checkout} className='w-[80px] h-[35px] rounded-md bg-[#398b7f] text-white' >Buy</button>}
+          {/* {data.type === "rent" ? <button onClick={checkout} className='w-[80px] h-[35px] rounded-md bg-[#398b7f] text-white'>Rent</button>
+            : <button onClick={checkout} className='w-[80px] h-[35px] rounded-md bg-[#398b7f] text-white' >Buy</button>} */}
         </div>
       </div>
     </div>
