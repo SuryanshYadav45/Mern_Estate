@@ -4,6 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import Cards from './Cards';
 
 const CarouselComponent = ({data}) => {
+  console.log(data);
   return (
     
          <Carousel

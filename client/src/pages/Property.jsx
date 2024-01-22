@@ -52,14 +52,14 @@ const Property = () => {
       </Swiper>
     </div>
     <div className='w-[100%] p-2 med:w-[45%]'>
-      <h1 className='text-[#4f998e] font-bold text-[30px] capitalize py-2' >{property.propname}</h1>
-      <p className='text-[16px] flex items-center'><FaLocationDot color='green' />{property.address}</p>
+      <h1 className='text-[#4f998e] font-bold text-[25px] mobxl:text-[30px] capitalize py-2' >{property.propname}</h1>
+      <p className='text-[15px] flex items-center'><FaLocationDot color='green' />{property.address}</p>
       <p className='text-justify text-[16px] py-2'>{property.desc}</p>
       <div className='flex my-2'>
-     <span className='flex items-center me-3 text-[19px]'> <IoBedSharp className='me-1' color='#4f998e' size={25}/>{property.beds}Beds</span>
-      <span className='flex items-center me-3 text-[19px]'><FaBath className='me-1' color='#4f998e' size={25}/>{property.bathrooms}Baths</span>
-        <span className='flex items-center me-3 text-[19px]'><MdChair className='me-1' color='#4f998e' size={25}/>{property.furnished?"Furnished":"Not Furnished"}</span>
-        <span className='flex items-center me-3 text-[19px]'><FaSquareParking className='me-1'color='#4f998e' size={25}/>{property.parking?"Parking":"No Parking"}</span>
+     <span className='flex items-center me-3 text-[16px] mobxl:text-[19px]'> <IoBedSharp className='me-1' color='#4f998e' size={22}/>{property.beds}Beds</span>
+      <span className='flex items-center me-3 text-[16px] mobxl:text-[19px]'><FaBath className='me-1' color='#4f998e' size={22}/>{property.bathrooms}Baths</span>
+        <span className='flex items-center me-3 text-[16px] mobxl:text-[19px]'><MdChair className='me-1' color='#4f998e' size={22}/>{property.furnished?"Furnished":"Not Furnished"}</span>
+        <span className='flex items-center me-3 text-[16px] mobxl:text-[19px]'><FaSquareParking className='me-1'color='#4f998e' size={22}/>{property.parking?"Parking":"No Parking"}</span>
         
       </div>
      
