@@ -119,10 +119,10 @@ const CreateProperty = () => {
         }
 
     }
-    console.log(formdata)
+    
     return (
         <div className='w-full lg:h-[calc(100vh-72px)] bg-gray-200 p-2'>
-            <h1 className='text-center my-2 font-bold text-[30px] uppercase'>Create Your Property</h1>
+            <h1 className='text-center my-2 font-bold text-[22px]  mobxl:text-[30px] uppercase'>Create Your Property</h1>
             <div className='max-w-[1150px] m-auto flex flex-col tabl:flex-row'>
 
                 <div className='w-[100%] tabl:w-[50%] p-4 flex flex-col'>

@@ -57,8 +57,8 @@ const UserListing = ({data}) => {
             <p className='font-semibold m-auto text-[16px] text-center  tabl:text-[25px] capitalize'>{data.propname}</p>
         </div>
         <div className='flex flex-col'>
-            <button onClick={handleDelete} className='bg-red-600 my-1 rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-red-600 hover:border-red-600 uppercase text-[14px]'>Delete</button>
-            <button onClick={()=>navigate(`/updatelisting/${data._id}`)} className='bg-green-600 my-1 rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-green-600 hover:border-green-600 uppercase text-[14px]'>Edit</button>
+            <button onClick={handleDelete} className='bg-red-600  p-[1px] mb-[2px] rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-red-600 hover:border-red-600 uppercase text-[14px]'>Delete</button>
+            <button onClick={()=>navigate(`/updatelisting/${data._id}`)} className='bg-green-600 p-[1px]  rounded-lg text-white w-[60px] h-[35px] border transition duration-300 hover:bg-white hover:border hover:text-green-600 hover:border-green-600 uppercase text-[14px]'>Edit</button>
         </div>
     </div>
   )
