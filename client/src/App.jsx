@@ -12,6 +12,8 @@ import UserProperty from './pages/UserProperty'
 import UpdateListing from './pages/UpdateListing'
 import Property from './pages/Property'
 import Search from './pages/Search'
+import Success from './pages/Success'
+import Cancel from "./pages/Cancel"
 import { Zoom } from 'react-toastify';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +42,8 @@ const App = () => {
         <Route path='/updatelisting/:listingid' element={<UpdateListing/>} />
         <Route path='/property/:id' element={<Property/>} />
         <Route path='/search' element={<Search/>} />
+        <Route path='/success' element={<Success/>} />
+        <Route path='/cancel' element={<Cancel/>} />
        
       </Routes>
       <ToastContainer className="mt-[65px] z-40" transition={Zoom} />

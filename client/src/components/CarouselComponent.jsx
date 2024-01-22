@@ -68,8 +68,8 @@ const CarouselComponent = ({data}) => {
             slidesToSlide={1}
             swipeable
           >
-            {data.map((data) => (
-              <div className='flex justify-center'><Cards key={data.id} data={data} /></div>
+            {data.map((data,index) => (
+              <div key={index} className='flex justify-center'><Cards  data={data} /></div>
             ))}
 
           </Carousel>
