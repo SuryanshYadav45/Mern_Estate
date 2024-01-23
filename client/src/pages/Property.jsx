@@ -26,9 +26,40 @@ const Property = () => {
         }
         fetchdata();
     },[])
-    const price=property?.price;
+    
+    const checkout= async()=>
+  {
+    try {
+      const response = await fetch('http://localhost:4000/payment/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          property: [
+            {
+              name:"product2",
+              description: 'Description for Product 1',
+              price: '7653',
+              quantity: 4,
+            },]
+           }),
+      });
+      // const data =await response.json();
+      // console.log(data);
 
-    const formatted=price?.toLocaleString("en-IN");
+      if (response.ok) {
+        const session = await response.json();
+        // Redirect the user to the checkout session URL
+      } else {
+        console.error('Error initiating payment:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }
+ 
+
   return (
    <div className='w-full'>
     <div className='flex flex-col max-w-[1300px]  m-auto med:flex-row '>
@@ -68,8 +99,8 @@ const Property = () => {
       <p className='capitalize text-[20px] font-semibold text-[#3d877c]'>price: <span className='font-bold text-[#403d3d]'>₹{property?.price?.toLocaleString("en-IN")}</span> </p>
 
       {
-        property.type==="rent"?<button className='w-[140px] h-[50px] my-5 rounded-md bg-[#398b7f] text-white'>Rent</button>
-        :<button className='w-[140px] h-[50px] rounded-md bg-[#398b7f] my-5 text-white'>Buy</button>
+        property.type==="rent"?<button className='w-[140px] h-[50px] my-5 rounded-md bg-[#398b7f] text-white' onClick={checkout}>Rent</button>
+        :<button className='w-[140px] h-[50px] rounded-md bg-[#398b7f] my-5 text-white' onClick={checkout}>Buy</button>
       }
     </div>
     </div>
