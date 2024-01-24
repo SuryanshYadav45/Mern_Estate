@@ -13,7 +13,7 @@ admin.initializeApp({
 const signup = async (req, res) => {
   try {
     const{username,email,password}=req.body;
-    const hashpassword = await bcrypt.hash(password, 12);
+    const hashpassword = await bcrypt.hash(password,);
     const response = await UserModel.create({
       username,
       email,

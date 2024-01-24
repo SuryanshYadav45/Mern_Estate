@@ -18,21 +18,22 @@ const payment= async (req, res) => {
       payment_method_types: ['card'],
       line_items:lineItems,
       mode:'payment',
-      success_url: `http://localhost:4000/success`,
+      success_url: `http://localhost:4000/payment/success?session_id={CHECKOUT_SESSION_ID}&order=${encodeURI(JSON.stringify(req.body))}`,
       cancel_url: `http://localhost:4000/cancel`,
     });
-  
-    console.log(session);
-    res.status(200).json(session);
+    res.status(200).json(session.url);
   };
 
 
   const success=async(req,res)=>
   {
     try {
-      const { session_id } = req.query;
+      const { session_id,order } = req.query;
+      console.log(session_id);
+      const orderDetail = decodeURI(order);
+      console.log(orderDetail);
       const session = await stripe.checkout.sessions.retrieve(session_id);
-  
+      console.log(session);
       const paymentId = session.payment_intent;
   
       console.log("paymentId",paymentId);

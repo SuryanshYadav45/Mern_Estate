@@ -50,6 +50,7 @@ const Property = () => {
 
       if (response.ok) {
         const session = await response.json();
+        window.location=session;
         // Redirect the user to the checkout session URL
       } else {
         console.error('Error initiating payment:', response.statusText);
