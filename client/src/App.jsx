@@ -40,13 +40,13 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/userproperty' element={<UserProperty />} />
         <Route path='/updatelisting/:listingid' element={<UpdateListing/>} />
-        <Route path='/property/:id' element={<Property/>} />
+        <Route path='/property/:propid' element={<Property/>} />
         <Route path='/search' element={<Search/>} />
         <Route path='/success' element={<Success/>} />
         <Route path='/cancel' element={<Cancel/>} />
        
       </Routes>
-      <ToastContainer className="mt-[65px] z-40" transition={Zoom} />
+      <ToastContainer className="mt-[65px]  z-40" transition={Zoom} />
     </Router>
   </>
   )

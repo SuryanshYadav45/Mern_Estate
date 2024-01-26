@@ -74,7 +74,8 @@ const updateListing = async (req, res) => {
     }
 }
 const getUserListing = async (req, res) => {
-    const listing = await PropertyModel.findById(req.params.id);
+    const{id}=req.params;
+    const listing = await PropertyModel.findById(id);
 
     listing ? res.status(200).json(listing) : res.status(404).json("no listing found");
 
