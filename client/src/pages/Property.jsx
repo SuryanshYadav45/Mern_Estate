@@ -42,8 +42,10 @@ const Property = () => {
               description: 'Description for Product 1',
               price: '7653',
               quantity: 4,
-            },]
+            },],
+            userid:"12542dtgdevgb"
            }),
+           
       });
       // const data =await response.json();
       // console.log(data);
