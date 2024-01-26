@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const purchaseSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
   },
@@ -12,6 +12,6 @@ const purchaseSchema = new mongoose.Schema({
   },
 });
 
-const Purchase=mongoose.model("Purchase",purchaseSchema);
+const PurchaseModel=mongoose.model("Purchase",purchaseSchema);
 
-module.exports=Purchase;
+module.exports=PurchaseModel;
