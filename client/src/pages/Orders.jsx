@@ -1,8 +1,35 @@
+import { jwtDecode } from 'jwt-decode';
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 function Orders() {
+    const [property, setproperty] = useState([])
+    const { currentuser, loading } = useSelector((state) => state.user)
+    const decoded = currentuser ? jwtDecode(currentuser.token) : null
+    const { id } = decoded || {};
+
+    // useEffect(()=>{
+
+    //     const fetchdata=async()=>{
+    //         const res= await fetch(`http://localhost:4000/listing/userlisting/${id}`);
+    //         const data= await res.json();
+    //         setproperty(data);
+    //     }
+    //     fetchdata();
+
+    // },[])
+
   return (
-    <div>Orders</div>
+    <div className='w-full '>
+       
+        {
+            property?.map((data)=>
+            {
+                return <UserListing key={data._id} data={data} />
+            }
+            )
+        }
+    </div>
   )
 }
 

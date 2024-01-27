@@ -1,4 +1,5 @@
-const PropertyModel = require("../models/PropertyModel")
+const PropertyModel = require("../models/PropertyModel");
+const PurchaseModel = require("../models/PurchaseModel");
 
 
 const createListing = async (req, res) => {
@@ -95,6 +96,22 @@ const searchListing = async (req, res) => {
 
 
 
+const purchasedListing=async(req,res)=>
+{
+    try {
+       const{id}=req.params;
+       const listing= await PurchaseModel.find({userId:id}).populate("propertyId")
+       if(!listing)
+       {
+        res.status(404).json("No Listing Found");
+       }
+       const propertyData = listing.map((listing) => listing.propertyId);
+       res.status(201).json(propertyData)
+    } catch (error) {
+        res.status(500).json({message:"internla server error"})
+    }
+}
+
 
 
 module.exports = {
@@ -104,5 +121,6 @@ module.exports = {
     deleteListing,
     updateListing,
     getUserListing,
-    searchListing
+    searchListing,
+    purchasedListing
 }

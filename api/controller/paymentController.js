@@ -21,7 +21,7 @@ const payment= async (req, res) => {
       payment_method_types: ['card'],
       line_items:lineItems,
       mode:'payment',
-      success_url: `http://localhost:4000/payment/success?session_id={CHECKOUT_SESSION_ID}&propertyid=${propertyId}&userId=${userId}`,
+      success_url: `http://localhost:4000/payment/success?session_id={CHECKOUT_SESSION_ID}&propertyId=${propertyId}&userId=${userId}`,
       cancel_url: `http://localhost:5173/cancel`,
     });
     res.status(200).json(session.url);
