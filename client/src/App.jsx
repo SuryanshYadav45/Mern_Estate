@@ -35,7 +35,7 @@ const App = () => {
         <Route path='/create-property' element={<CreateProperty/>} />
           </Route>
         <Route  element={<PrivateRoute/>}>
-        <Route path='/order' element={<Orders/>} />
+        <Route path='/orders' element={<Orders/>} />
           </Route>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />

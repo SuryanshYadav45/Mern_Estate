@@ -9,31 +9,35 @@ function Orders() {
     const decoded = currentuser ? jwtDecode(currentuser.token) : null
     const { id } = decoded || {};
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        const fetchdata=async()=>{
-            const res= await fetch(`http://localhost:4000/listing/purchased/${id}`);
-            const data= await res.json();
+        const fetchdata = async () => {
+            const res = await fetch(`http://localhost:4000/listing/purchased/${id}`);
+            const data = await res.json();
             setproperty(data);
         }
         fetchdata();
 
-    },[])
+    }, [])
 
     console.log(property);
-  return (
-    <div className='w-full '>
-       
-this page will soon display the property bought by you 
-        {
-            property?.map((data)=>
+    return (
+        <div className='w-full '>
+  <h1>Property Bought</h1>
+
             {
-                return <UserListing key={data._id} data={data} />
+                property.length>0 ? (property.map((data) => {
+                    return <UserListing button={false} key={data._id} data={data} />
+                }
+                )) :
+                    (
+                        <h2>you haven't purchased any property yet</h2>
+                    )
+
+
             }
-            )
-        }
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Orders
