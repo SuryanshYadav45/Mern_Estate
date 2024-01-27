@@ -77,7 +77,7 @@ const Header = () => {
               <ul className='flex flex-col gap-2'>
                 <Link onClick={()=>setMenuVisible(!menuVisible)} to="/"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Home</li></Link>
                 <Link onClick={()=>setMenuVisible(!menuVisible)}  to="/about"><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>About</li></Link>
-                <Link onClick={()=>setMenuVisible(!menuVisible)} to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link></ul>           </div>
+                {currentuser?<Link onClick={()=>setMenuVisible(!menuVisible)} to='/profile'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Profile</li></Link>:<Link onClick={()=>setMenuVisible(!menuVisible)} to='/signin'><li className='text-[#1b5051] font-semibold text-[20px] hover:underline hover:text-white'>Sign In</li></Link>}</ul>           </div>
           </div>
           </>
         )}

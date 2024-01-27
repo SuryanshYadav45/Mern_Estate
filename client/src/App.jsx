@@ -17,6 +17,7 @@ import Cancel from "./pages/Cancel"
 import { Zoom } from 'react-toastify';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Orders from './pages/Orders'
 
 const App = () => {
 
@@ -32,6 +33,9 @@ const App = () => {
           </Route>
         <Route  element={<PrivateRoute/>}>
         <Route path='/create-property' element={<CreateProperty/>} />
+          </Route>
+        <Route  element={<PrivateRoute/>}>
+        <Route path='/order' element={<Orders/>} />
           </Route>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
