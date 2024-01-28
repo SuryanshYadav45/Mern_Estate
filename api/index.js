@@ -7,12 +7,12 @@ const listingRouter=require("./router/listingRouter.js");
 const paymentRouter=require("./router/paymentRouter.js");
 const cors=require("cors")
 const app = express();
-
+const path =require("path")
 
 app.use(cors());
 app.use(express.json());
 
-
+const ___dirname=path.resolve();
 
 mongoose.connect(process.env.DATABASE_STRING).then(() => {
     console.log("database connected successfully")
@@ -28,3 +28,10 @@ app.use('/user',userRouter);
 app.use('/auth',authRouter);
 app.use('/listing',listingRouter);
 app.use('/payment',paymentRouter);
+
+app.use(express.static(path.join(___dirname,'/client/dist')));
+
+app.get('*',(req,res)=>
+{
+    res.sendFile(path.join(___dirname,'client','dist','index.html'))
+})

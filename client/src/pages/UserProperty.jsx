@@ -30,10 +30,12 @@ const UserProperty = () => {
     <div className='w-full '>
        
         {
-            property?.map((data)=>
+            property?(property?.map((data)=>
             {
                 return <UserListing button={true} key={data._id} data={data} />
             }
+            )):(
+                <h1>You haven't listed any property yet</h1>
             )
         }
     </div>
