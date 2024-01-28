@@ -20,9 +20,9 @@ mongoose.connect(process.env.DATABASE_STRING).then(() => {
     console.log("an error occured:",error)
 })
 
-app.listen(4000, (req,res) => {
-    res.send("server started at the specified port")
-})
+// app.listen(4000, (req,res) => {
+//     res.send("server started at the specified port")
+// })
 
 app.use('/',(req,res)=>
 {
