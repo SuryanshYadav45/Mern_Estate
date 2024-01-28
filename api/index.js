@@ -24,6 +24,10 @@ app.listen(4000, (req,res) => {
     res.send("server started at the specified port")
 })
 
+app.use('/',(req,res)=>
+{
+    res.send("server runnning")
+})
 app.use('/user',userRouter);
 app.use('/auth',authRouter);
 app.use('/listing',listingRouter);
