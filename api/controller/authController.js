@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../../firebase_credentials.json");
+var serviceAccount = require("../firebase_credentials.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
