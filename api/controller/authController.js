@@ -13,16 +13,25 @@ admin.initializeApp({
 const signup = async (req, res) => {
   try {
     const{username,email,password}=req.body;
-    const hashpassword = await bcrypt.hash(password,);
+    console.log(req.body);
+    const hashpassword = await bcrypt.hash(password,12);
+    console.log(hashpassword);
     const response = await UserModel.create({
       username,
       email,
       password: hashpassword
     })
+    console.log(response);
+    if(!response)
+    {
+      res.status(500).json(error.message)
+    }
+    
     res.status(201).json({message:"User created successfully "});
 
 
   } catch (error) {
+    console.log(error);
     res.status(500).json(error.message)
   }
 }
