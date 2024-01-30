@@ -25,6 +25,14 @@ app.listen(4000, (req,res) => {
     console.log("server started at the specified port")
 })
 
+app.use('/hello',(req,res)=>
+{
+    res.send({
+        name:"suryansh",
+        message:"hello from the server"
+    })
+})
+
 app.use('/',(req,res)=>
 {
     res.send("server runnning")
