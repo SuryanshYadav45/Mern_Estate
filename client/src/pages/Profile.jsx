@@ -121,7 +121,7 @@ console.log(expirationDate);
     e.preventDefault();
     dispatch(signinStart());
     try {
-      const response = await fetch(`http://localhost:4000/user/update/${id}`,
+      const response = await fetch(`https://backendestate.onrender.com/user/update/${id}`,
         {
           method: "POST",
           headers: {
@@ -151,7 +151,7 @@ console.log(expirationDate);
 
   const handledelete=async()=>{
     dispatch(signinStart())
-    const response=await fetch(`http://localhost:4000/user/delete/${id}`,{
+    const response=await fetch(`https://backendestate.onrender.com/user/delete/${id}`,{
       method:"POST",
       
     })

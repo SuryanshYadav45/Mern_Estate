@@ -35,7 +35,7 @@ const SignUp = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     dispatch(signinStart());
-    const res= await fetch("http://localhost:4000/auth/signup",{
+    const res= await fetch("https://backendestate.onrender.com/auth/signup",{
       method:'POST',
       headers:{
         'Content-Type':'application/json',

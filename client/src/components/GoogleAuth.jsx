@@ -31,7 +31,7 @@ const GoogleAuth = (props) => {
             const result=await signInWithPopup(auth,provider)
             const idToken=await result.user.getIdToken();
             
-            const response= await fetch('http://localhost:4000/auth/signin/google',{
+            const response= await fetch('https://backendestate.onrender.com/auth/signin/google',{
               method:"POST",
               headers:{
                 'Content-Type':'application/json',

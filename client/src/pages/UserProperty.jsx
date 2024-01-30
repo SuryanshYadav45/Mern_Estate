@@ -17,7 +17,7 @@ const UserProperty = () => {
     useEffect(()=>{
 
         const fetchdata=async()=>{
-            const res= await fetch(`http://localhost:4000/listing/userlisting/${id}`);
+            const res= await fetch(`https://backendestate.onrender.com/listing/userlisting/${id}`);
             const data= await res.json();
             setproperty(data);
         }

@@ -24,7 +24,7 @@ const Property = () => {
   
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await fetch(`http://localhost:4000/listing/getUserListing/${propid}`)
+      const response = await fetch(`https://backendestate.onrender.com/listing/getUserListing/${propid}`)
       const data = await response.json();
       setproperty(data);
     }
@@ -42,7 +42,7 @@ const Property = () => {
 
 
     try {
-      const response = await fetch('http://localhost:4000/payment/create-checkout-session', {
+      const response = await fetch('https://backendestate.onrender.com/payment/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

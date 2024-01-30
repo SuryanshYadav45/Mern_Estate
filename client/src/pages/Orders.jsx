@@ -12,7 +12,7 @@ function Orders() {
     useEffect(() => {
 
         const fetchdata = async () => {
-            const res = await fetch(`http://localhost:4000/listing/purchased/${id}`);
+            const res = await fetch(`https://backendestate.onrender.com/listing/purchased/${id}`);
             const data = await res.json();
             setproperty(data);
         }

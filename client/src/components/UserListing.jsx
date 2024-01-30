@@ -15,7 +15,7 @@ const UserListing = ({data,button}) => {
   console.log(id);
   const handleDelete=async()=>{
      try {
-      const response= await fetch(`http://localhost:4000/listing/deletelisting/${data._id}`,{
+      const response= await fetch(`https://backendestate.onrender.com/listing/deletelisting/${data._id}`,{
         method:"DELETE",
         headers:{
           "Content-Type":"application/json"

@@ -29,7 +29,7 @@ const UpdateListing = () => {
     })
     useEffect(() => {
         const fetchListing = async () => {
-            const response = await fetch(`http://localhost:4000/listing/getUserListing/${listingid}`)
+            const response = await fetch(`https://backendestate.onrender.com/listing/getUserListing/${listingid}`)
             const data = await response.json();
             setformdata({
                 propname: data.propname,
@@ -123,7 +123,7 @@ const UpdateListing = () => {
 
     const updatelisting = async() => {
         try {
-            const response= await fetch(`http://localhost:4000/listing/updatelisting/${listingid}`,
+            const response= await fetch(`https://backendestate.onrender.com/listing/updatelisting/${listingid}`,
         {
             method:"POST",
             headers:{

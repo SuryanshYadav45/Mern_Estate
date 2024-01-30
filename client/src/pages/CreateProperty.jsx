@@ -105,7 +105,7 @@ const CreateProperty = () => {
 
     const createlisting = async () => {
 
-        const response = await fetch('http://localhost:4000/listing/createlisting', {
+        const response = await fetch('https://backendestate.onrender.com/listing/createlisting', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

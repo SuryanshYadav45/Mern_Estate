@@ -9,7 +9,7 @@ const navigate=useNavigate();
   const checkout= async()=>
   {
     try {
-      const response = await fetch('http://localhost:4000/payment/create-checkout-session', {
+      const response = await fetch('https://backendestate.onrender.com/payment/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ const Home = () => {
   const [buy, setbuy] = useState([])
   useEffect(() => {
     const fetchdata = async () => {
-      const respone = await fetch('http://localhost:4000/listing/getlisting')
+      const respone = await fetch('https://backendestate.onrender.com/listing/getlisting')
       const data = await respone.json();
       const rentListings = data.filter((item) => item.type === 'rent');
       const buyListings = data.filter((item) => item.type === 'sell');
