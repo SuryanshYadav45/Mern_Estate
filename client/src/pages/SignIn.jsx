@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link,useNavigate } from "react-router-dom";
-import { css } from '@emotion/react';
-import { PulseLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import {logout, signinEnd,signinStart} from ".././redux/slice/userSlice.js"
 import GoogleAuth from '../components/GoogleAuth.jsx';
@@ -18,11 +16,7 @@ const SignIn = () => {
     password: '',
   });
 
-  const override =css `
-    display: "block",
-    margin: "0 auto",
-    borderColor: "white",
-  `;
+ 
 
 
   const handleChange = (e) => {
@@ -94,7 +88,7 @@ const SignIn = () => {
             className='w-[250px] text-[14px]  h-9 p-2 outline-2 border outline-none border-gray-500 focus:border-gray-900 focus:border-2 rounded-lg moblg:w-[320px] tabl:w-[320px] lg:w-[400px] moblg:text-[18px]'
             placeholder='Enter Your Password'
             required />
-          <button  disabled={loading} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? <PulseLoader color={'#F3F8FF'}  css={override} size={12} />:"Sign In"}</button>
+          <button  disabled={loading} type="submit" className='bg-[#1b5051] text-white p-2 rounded-md capitalize' >{loading? "loading":"Sign In"}</button>
           <p className='text-center m-[-20px]'>OR</p>
           <GoogleAuth text="in" />
         </form>
