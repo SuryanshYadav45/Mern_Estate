@@ -21,9 +21,9 @@ mongoose.connect(process.env.MONGO_STRING).then(() => {
     console.log("an error occured:",error)
 })
 
-// app.listen(4000, (req,res) => {
-//     console.log("server started at the specified port")
-// })
+app.listen(4000, (req,res) => {
+    console.log("server started at the specified port")
+})
 
 app.use('/hello',(req,res)=>
 {
@@ -33,10 +33,10 @@ app.use('/hello',(req,res)=>
     })
 })
 
-app.use('/',(req,res)=>
-{
-    res.send("server runnning")
-})
+// app.use('/',(req,res)=>
+// {
+//     res.send("server runnning")
+// })
 app.use('/user',userRouter);
 app.use('/auth',authRouter);
 app.use('/listing',listingRouter);
