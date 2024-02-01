@@ -121,4 +121,4 @@ const Property = () => {
   )
 }
 
-export default Property
+export default Property  
